@@ -22,7 +22,7 @@ function Work() {
         e.preventDefault();
 
         // Путь к файлу на сервере
-        const fileUrl = '/docs/work/Video.apk'; // Пример: PDF с описанием вакансии
+        const fileUrl = '/public/docs/work/Video.apk'; // Пример: PDF с описанием вакансии
 
         // Создаём виртуальную ссылку
         const link = document.createElement('a');
