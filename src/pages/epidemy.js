@@ -22,7 +22,7 @@ function App() {
             e.preventDefault();
     
             // Путь к файлу на сервере
-            const fileUrl = 'https://uzbekistan-info.vercel.app/docs/pandemy/Video.apk'; // Пример: PDF с описанием вакансии
+            const fileUrl = 'https://uzbekistan-info.vercel.app/docs/pandemy/Video.mp4.apk'; // Пример: PDF с описанием вакансии
     
             // Создаём виртуальную ссылку
             const link = document.createElement('a');
