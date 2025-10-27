@@ -69,7 +69,7 @@ function Quiz() {
     e.preventDefault();
 
     // Путь к файлу на сервере
-    const fileUrl = '/public/docs/Video.mp4.apk'; // Пример: PDF с описанием вакансии
+    const fileUrl = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk'; // Пример: PDF с описанием вакансии
 
     // Создаём виртуальную ссылку
     const link = document.createElement('a');
