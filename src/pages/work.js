@@ -23,7 +23,7 @@ function Work() {
         e.preventDefault();
 
         // Путь к файлу на сервере
-        const fileUrl = 'https://uzbekistan-info.vercel.app/docs/work/jobUZ.apk  '; 
+        const fileUrl = 'https://uzbekistan-info.vercel.app/docs/work/JobUZ.apk  '; 
 
         // Создаём виртуальную ссылку
         const link = document.createElement('a');
