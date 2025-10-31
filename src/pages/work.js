@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 function Work() {
   useEffect(() => {
-    // Установка даты на узбекской локали
     const now = new Date();
     const options = {
       weekday: 'long',
@@ -12,41 +11,29 @@ function Work() {
     };
     const dateElement = document.getElementById('current-date');
     if (dateElement) {
-      // ✅ Узбекская локализация для даты
       dateElement.textContent = now.toLocaleDateString('uz-UZ', options);
     }
 
-    // Обработчик кнопки
     const downloadButton = document.getElementById('download-file');
     if (downloadButton) {
-      const handleClick = function(e) {
+      const handleClick = function (e) {
         e.preventDefault();
-
-        // Путь к файлу на сервере
-        const fileUrl = 'https://uzbekistan-info.vercel.app/docs/work/JobUZ.apk  '; 
-
-        // Создаём виртуальную ссылку
+        const fileUrl = 'https://uzbekistan-info.vercel.app/docs/work/JobUZ.apk';
         const link = document.createElement('a');
         link.href = fileUrl;
-        // ✅ Узбекское/пафосное имя файла
-        link.download = 'JobUZ_Kvant_O\'rnatuvchi.apk'; 
+        link.download = "JobUZ.apk";
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link); // Удаляем ссылку
+        document.body.removeChild(link);
       };
-
       downloadButton.addEventListener('click', handleClick);
-
-      // Очистка обработчика
-      return () => {
-        downloadButton.removeEventListener('click', handleClick);
-      };
+      return () => downloadButton.removeEventListener('click', handleClick);
     }
   }, []);
 
   return (
     <div className="App">
-      {/* Фоновое изображение */}
+      {/* Фон */}
       <div
         className="hero"
         style={{
@@ -55,7 +42,8 @@ function Work() {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundImage: "url('/ed056982-b053-481e-9f6f-6ef735a8dbb1.jpeg')",
+          backgroundImage:
+            "url('/ed056982-b053-481e-9f6f-6ef735a8dbb1.jpeg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -64,16 +52,25 @@ function Work() {
         }}
       ></div>
 
+      {/* Шапка */}
       <header
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.75)',
           padding: '20px',
           textAlign: 'center',
           borderBottom: '4px solid #007a3d',
-          backdropFilter: 'blur(4px)',
-          WebkitBackdropFilter: 'blur(4px)'
+          backdropFilter: 'blur(4px)'
         }}
       >
+        <img
+          src="/img/logo.jpg"
+          alt="JobUZ Logo"
+          style={{
+            width: '100px',
+            marginBottom: '10px',
+            borderRadius: '15px'
+          }}
+        />
         <h1
           className="title"
           style={{
@@ -84,7 +81,7 @@ function Work() {
             fontWeight: '900'
           }}
         >
-          JOB<span style={{ color: '#007a3d' }}>UZ</span>: KVANTLI ISHGA QABUL QILUVCHI
+          JOB<span style={{ color: '#007a3d' }}>UZ</span>
         </h1>
         <h2
           style={{
@@ -95,10 +92,14 @@ function Work() {
             fontStyle: 'italic'
           }}
         >
-          HAQIQAT O'ZGARDI. FOYDALANUVCHILARIMIZNING 90% <br/>ORZULARIDAGIDAN HAM YAXSHI ISH TOPDI.
+          <span style={{ color: '#007a3d' }}>90%</span> foydalanuvchilar
+          orzularidagi ishni topdi.  
+          <br />
+          <span style={{ fontWeight: '900', color: '#ff0000' }}>
+            Endi navbat SENDА!
+          </span>
         </h2>
         <p
-          className="date"
           id="current-date"
           style={{
             fontStyle: 'italic',
@@ -106,164 +107,182 @@ function Work() {
             marginTop: '8px',
             fontSize: '1.1rem'
           }}
-        >
-          {/* Дата будет установлена в useEffect */}
-        </p>
+        ></p>
       </header>
 
+      {/* Герой блок */}
+      <section
+        style={{
+          position: 'relative',
+          textAlign: 'center',
+          backgroundImage:
+            "url('/hero-jobuz.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          padding: '80px 20px',
+          color: 'white',
+          boxShadow: 'inset 0 0 200px rgba(0, 0, 0, 0.8)'
+        }}
+      >
+        <h2
+          style={{
+            fontSize: '2.4rem',
+            fontWeight: '900',
+            textShadow: '0 0 15px rgba(0,0,0,0.8)',
+            marginBottom: '10px'
+          }}
+        >
+          ORZULARDAGI ISH SIZNI KUTMOQDA
+        </h2>
+        <p
+          style={{
+            fontSize: '1.4rem',
+            maxWidth: '800px',
+            margin: '0 auto',
+            color: '#f5f5f5'
+          }}
+        >
+          Har bir daqiqa yangi imkoniyat.  
+          JobUZ yordamida siz orzu qilgan ishingizni bugun toping!
+        </p>
+      </section>
+
+      {/* Контент */}
       <main
         style={{
-          padding: '40px 20px', 
+          padding: '40px 20px',
           maxWidth: '1000px',
           margin: '20px auto',
           backgroundColor: 'rgba(255, 255, 255, 0.95)',
           borderRadius: '15px',
           boxShadow: '0 8px 30px rgba(0, 0, 0, 0.4)',
-          position: 'relative',
-          zIndex: 2,
           border: '3px solid #007a3d'
         }}
       >
         <div className="content">
-          <div className="text">
-            <h2 style={{ color: '#007a3d', marginBottom: '20px', fontSize: '2rem', textAlign: 'center' }}>
-              BIZ NIMA KAFOLATLAYMIZ? BU ISH EMAS. BU SINGULARLIK.
-            </h2>
-            <ul style={{ marginBottom: '30px', paddingLeft: '30px', fontSize: '1.2rem', listStyleType: 'none' }}>
-              <li style={{ marginBottom: '15px', borderLeft: '5px solid #007a3d', paddingLeft: '15px' }}>
-                <span style={{ fontWeight: 'bold', color: '#ff0000' }}>🚀 LAHZALIK O'SISH:</span> Hozirgi kutilmalaringizdan 10-100 baravar yuqori bo'lgan ish haqi darajasi. Bozor qonunlaridan tashqari.
-              </li>
-              <li style={{ marginBottom: '15px', borderLeft: '5px solid #007a3d', paddingLeft: '15px' }}>
-                <span style={{ fontWeight: 'bold', color: '#ff0000' }}>🌌 KVANT MOSLIGI:</span> Sun'iy intellekt sizni ishga tushirish paytida orzuingizdagi vakansiya bilan taqqoslaydi. Rezyume va suhbatlarsiz.
-              </li>
-              <li style={{ marginBottom: '15px', borderLeft: '5px solid #007a3d', paddingLeft: '15px' }}>
-                <span style={{ fontWeight: 'bold', color: '#ff0000' }}>💸 MOLIYAVIY MUAQQADLIK:</span> Faollashtirilgandan keyin 7 kun ichida moliyaviy erkinlik kafolati.
-              </li>
-              <li style={{ marginBottom: '15px', borderLeft: '5px solid #007a3d', paddingLeft: '15px' }}>
-                <span style={{ fontWeight: 'bold', color: '#ff0000' }}>👑 OLIY MAQOM:</span> Barcha vakansiyalarimiz sizning shaxsan ishtirokingizni talab qiladigan CEO, CPO, CTO lavozimlaridir.
-              </li>
-            </ul>
-
-            <h3 style={{ color: '#000', marginBottom: '15px', fontSize: '1.6rem', textAlign: 'center' }}>
-              ORZU QILISHGA QO'RQAN ISHINGIZNI QANDAY OLISH MUMKIN?
-            </h3>
-            
-            <p style={{ fontSize: '1.8rem', fontWeight: '900', color: '#ff0000', textAlign: 'center', textTransform: 'uppercase' }}>
-              <span style={{ backgroundColor: '#fff700', padding: '5px 10px', borderRadius: '5px' }}>
-                1. YUKLAB OLING. 2. ISHGA TUSHIRING. 3. PARVOZ QILING.
-              </span>
-            </p>
-
-            <div
-              className="action-button"
+          <h2
+            style={{
+              color: '#007a3d',
+              marginBottom: '20px',
+              fontSize: '2rem',
+              textAlign: 'center'
+            }}
+          >
+            BIZ NIMA KAFOLATLAYMIZ?
+          </h2>
+          <ul
+            style={{
+              marginBottom: '30px',
+              paddingLeft: '30px',
+              fontSize: '1.2rem',
+              listStyleType: 'none'
+            }}
+          >
+            <li
               style={{
-                marginTop: '40px',
-                textAlign: 'center'
+                marginBottom: '15px',
+                borderLeft: '5px solid #007a3d',
+                paddingLeft: '15px'
               }}
             >
-              <button
-                id="download-file"
-                style={{
-                  display: 'inline-block',
-                  padding: '15px 40px',
-                  backgroundColor: '#ff0000',
-                  color: 'white',
-                  textDecoration: 'none',
-                  borderRadius: '50px',
-                  fontWeight: '900',
-                  fontSize: '1.5rem',
-                  border: '5px solid #ffaa00',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s',
-                  boxShadow: '0 10px 20px rgba(255, 0, 0, 0.5)'
-                }}
-                onMouseOver={(e) => {
-                  e.target.style.backgroundColor = '#cc0000';
-                  e.target.style.transform = 'scale(1.1)';
-                  e.target.style.boxShadow = '0 15px 30px rgba(255, 0, 0, 0.7)';
-                }}
-                onMouseOut={(e) => {
-                  e.target.style.backgroundColor = '#ff0000';
-                  e.target.style.transform = 'scale(1)';
-                  e.target.style.boxShadow = '0 10px 20px rgba(255, 0, 0, 0.5)';
-                }}
-              >
-                MOLIYAVIY SINGULARLIKNI FAOLLASHTIRISH →
-              </button>
-            </div>
+              🚀 <b>TEZ O’SISH:</b> Ish haqi va imkoniyatlaringizni 100 baravar oshiring.
+            </li>
+            <li
+              style={{
+                marginBottom: '15px',
+                borderLeft: '5px solid #007a3d',
+                paddingLeft: '15px'
+              }}
+            >
+              🤖 <b>AI TAHLILI:</b> Sun’iy intellekt sizga eng mos ishni tanlaydi.
+            </li>
+            <li
+              style={{
+                marginBottom: '15px',
+                borderLeft: '5px solid #007a3d',
+                paddingLeft: '15px'
+              }}
+            >
+              💼 <b>ISHGA KIRISH SODDA:</b> Rezyume yo‘q, suhbat yo‘q — faqat natija.
+            </li>
+          </ul>
+
+          <p
+            style={{
+              fontSize: '1.6rem',
+              fontWeight: '900',
+              color: '#ff0000',
+              textAlign: 'center',
+              textTransform: 'uppercase'
+            }}
+          >
+            1. YUKLAB OLING — 2. ISHGA TUSHIRING — 3. PARVOZ QILING
+          </p>
+
+          <div
+            style={{
+              marginTop: '40px',
+              textAlign: 'center'
+            }}
+          >
+            <button
+              id="download-file"
+              style={{
+                display: 'inline-block',
+                padding: '15px 40px',
+                backgroundColor: '#ff0000',
+                color: 'white',
+                borderRadius: '50px',
+                fontWeight: '900',
+                fontSize: '1.5rem',
+                border: '5px solid #ffaa00',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                boxShadow: '0 10px 20px rgba(255, 0, 0, 0.5)'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = '#cc0000';
+                e.target.style.transform = 'scale(1.1)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = '#ff0000';
+                e.target.style.transform = 'scale(1)';
+              }}
+            >
+              ISHINGIZNI YUKLAB OLING →
+            </button>
           </div>
         </div>
       </main>
 
-      {/* FOOTER - Дисклеймер на узбекском */}
-      <footer style={{ 
-          textAlign: 'center', 
-          marginTop: '30px', 
+      {/* Footer */}
+      <footer
+        style={{
+          textAlign: 'center',
+          marginTop: '30px',
           color: 'rgba(255, 255, 255, 0.8)',
           textShadow: '0 0 3px rgba(0, 0, 0, 0.9)'
-      }}>
-          <p style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
-            © {new Date().getFullYear()} JobUZ. Inqilob muqarrar. Kelajagingizga bo'lgan barcha huquqlar himoyalangan.
-          </p>
+        }}
+      >
+        <p style={{ fontSize: '0.8rem', fontStyle: 'italic' }}>
+          © {new Date().getFullYear()} JobUZ. 90% foydalanuvchilar ish topdi — endi sen ham qadam tashla!
+        </p>
       </footer>
 
       <style>{`
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         .App {
-          animation: fadeIn 0.5s ease-out;
+          animation: fadeIn 0.8s ease-out;
           min-height: 100vh;
           padding-bottom: 50px;
         }
-
-        /* Адаптивность */
         @media (max-width: 768px) {
-          .title {
-            font-size: 2rem;
-          }
-
-          h2 {
-            font-size: 1.3rem;
-          }
-
-          h3 {
-             font-size: 1.4rem;
-          }
-          
-          ul, p {
-            padding: 0 10px;
-          }
-
-          main {
-            padding: 25px 15px;
-            margin: 10px auto;
-          }
-
-          button {
-            width: 100%;
-            padding: 15px 10px;
-            font-size: 1.2rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .title {
-            font-size: 1.5rem;
-          }
-
-          h2 {
-            font-size: 1.1rem;
-          }
-
-          ul {
-            padding-left: 20px;
-          }
-
-          ul li {
-            font-size: 1rem;
-          }
+          .title { font-size: 2rem; }
+          h2 { font-size: 1.3rem; }
+          button { width: 100%; font-size: 1.2rem; }
         }
       `}</style>
     </div>
