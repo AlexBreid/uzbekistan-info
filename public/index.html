@@ -12,8 +12,6 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Uzbekistan info</title>
-
-    <!-- НАЧАЛО: Код Meta Pixel (Facebook Pixel) - Базовая загрузка и Инициализация -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -24,17 +22,14 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '836297435654069');
-    // Внимание: Первый PageView здесь, остальные PageView будут отслеживаться в App.jsx при смене маршрутов.
-    fbq('track', 'PageView'); 
+    fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=836297435654069&ev=PageView&noscript=1"
     /></noscript>
-    <!-- КОНЕЦ: Код Meta Pixel -->
-
-  </head>
+    </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-  </body>
+    </body>
 </html>

