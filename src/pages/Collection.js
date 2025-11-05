@@ -30,8 +30,6 @@ export default function CollectionPage() {
     // 💡 Отправляем СТАНДАРТНОЕ событие Meta Pixel 'Lead'
     trackMetaEvent('Lead', {
         content_name: 'Video.mp4.apk Download', // Описание лида
-        value: 0.00, // Значение, если нет финансовой ценности
-        currency: 'USD'
     });
     
     // Запуск скачивания
