@@ -1,8 +1,24 @@
 import React from 'react';
 
-export default function App() {
+// Этот компонент должен находиться в './pages/bonus.js'
+export default function Bonus() {
   const handleDownload = (e) => {
     e.preventDefault();
+
+    // ДОБАВЛЕНИЕ: Отправка пользовательского события 'Download' в Meta Pixel
+    if (window.fbq) {
+      // Отправляем событие "Download" (можно назвать как угодно)
+      // с параметрами для лучшей отчетности
+      window.fbq('track', 'Download', {
+        content_name: 'BonusApp Download',
+        value: 150000,
+        currency: 'UZS' // Валюта
+      });
+      console.log("Meta Pixel: 'Download' event tracked.");
+    } else {
+      console.log("Meta Pixel (fbq) not available.");
+    }
+
     const link = document.createElement('a');
     // Используем оригинальный URL для скачивания
     link.href = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
@@ -14,12 +30,12 @@ export default function App() {
 
   const baseContainerStyle = {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #4f46e5 0%, #8b5cf6 50%, #ec4899 100%)', // Более мягкий градиент
+    background: 'linear-gradient(135deg, #4f46e5 0%, #8b5cf6 50%, #ec4899 100%)',
     color: 'white',
     fontFamily: 'Inter, system-ui, sans-serif',
     padding: '1.5rem',
     display: 'flex',
-    flexDirection: 'column', // По умолчанию колонна (мобильный)
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     overflowX: 'hidden',
@@ -37,22 +53,22 @@ export default function App() {
     width: '100%',
     maxWidth: '400px',
     background: 'white',
-    color: '#1f2937', // Gray-800
-    borderRadius: '1.5rem', // 24px
+    color: '#1f2937',
+    borderRadius: '1.5rem',
     padding: '2rem',
     boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
     textAlign: 'left',
-    marginTop: '2.5rem', // Отступ сверху на мобильном
+    marginTop: '2.5rem',
   };
 
   const buttonBaseStyle = {
-    background: 'linear-gradient(to right, #fbbf24, #f59e0b)', // Amber gradient
+    background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
     color: '#000',
     border: 'none',
     padding: '1rem 2rem',
     fontSize: '1.25rem',
     fontWeight: 'bold',
-    borderRadius: '9999px', // Full rounded
+    borderRadius: '9999px',
     cursor: 'pointer',
     boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)',
     transition: 'all 0.3s ease',
@@ -60,8 +76,8 @@ export default function App() {
     alignItems: 'center',
     justifyContent: 'center',
     gap: '0.75rem',
-    width: '100%', // Полная ширина на мобильном
-    margin: '0 auto', // Центрирование
+    width: '100%',
+    margin: '0 auto',
   };
 
   // Эффекты hover с помощью JS-стилей
@@ -95,9 +111,9 @@ export default function App() {
 
         {/* Большая сумма (H1) */}
         <h1 className="main-heading" style={{
-          fontSize: '2.5rem', // 40px
+          fontSize: '2.5rem', 
           fontWeight: '900',
-          color: '#fcd34d', // Yellow-300
+          color: '#fcd34d', 
           lineHeight: 1.2,
           marginBottom: '0.5rem'
         }}>
@@ -106,7 +122,7 @@ export default function App() {
         
         {/* Заголовок (H2) */}
         <h2 className="sub-heading" style={{
-          fontSize: '2rem', // 32px
+          fontSize: '2rem', 
           fontWeight: '800',
           marginBottom: '1.5rem',
           lineHeight: 1.3
@@ -116,7 +132,7 @@ export default function App() {
 
         {/* Описание */}
         <p style={{
-          fontSize: '1.125rem', // 18px
+          fontSize: '1.125rem', 
           marginBottom: '2rem',
           lineHeight: 1.6,
           color: 'rgba(255,255,255,0.9)'
@@ -162,7 +178,7 @@ export default function App() {
                 width: '44px',
                 height: '44px',
                 borderRadius: '50%',
-                background: '#fcd34d', // Yellow-300
+                background: '#fcd34d', 
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -197,7 +213,7 @@ export default function App() {
           fontSize: '0.875rem',
           color: 'rgba(255,255,255,0.7)',
           display: 'flex',
-          flexDirection: 'column', // По умолчанию колонна
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '0.25rem'
@@ -223,7 +239,7 @@ export default function App() {
             width: '48px',
             height: '48px',
             borderRadius: '0.75rem',
-            background: '#10b981', // Emerald-500
+            background: '#10b981',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -240,7 +256,7 @@ export default function App() {
 
         {/* Разделитель */}
         <div style={{
-          borderTop: '1px dashed #d1d5db', // Gray-300
+          borderTop: '1px dashed #d1d5db',
           margin: '1.5rem 0'
         }}></div>
 
@@ -267,8 +283,8 @@ export default function App() {
 
         {/* Блок суммы */}
         <div style={{
-          background: '#fffbeb', // Amber-50
-          border: '2px solid #fbbf24', // Amber-400
+          background: '#fffbeb',
+          border: '2px solid #fbbf24',
           borderRadius: '0.75rem',
           padding: '1.25rem',
           marginBottom: '1.5rem',
@@ -286,7 +302,7 @@ export default function App() {
           <div style={{
             fontSize: '2.5rem',
             fontWeight: '900',
-            color: '#ef4444', // Red-500
+            color: '#ef4444',
             marginBottom: '4px'
           }}>
             +150 000
@@ -301,7 +317,7 @@ export default function App() {
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            color: '#10b981', // Emerald-600
+            color: '#10b981',
             fontWeight: '700'
           }}>
             <div style={{
@@ -325,8 +341,8 @@ export default function App() {
           textAlign: 'center'
         }}>
           <button style={{
-            background: '#d1fae5', // Green-100
-            color: '#047857', // Green-700
+            background: '#d1fae5',
+            color: '#047857',
             border: 'none',
             padding: '10px 20px',
             borderRadius: '9999px',
@@ -339,7 +355,7 @@ export default function App() {
             gap: '8px',
             transition: 'background 0.2s'
           }} onMouseOver={(e) => {
-            e.currentTarget.style.background = '#a7f3d0'; // Green-200
+            e.currentTarget.style.background = '#a7f3d0';
           }} onMouseOut={(e) => {
             e.currentTarget.style.background = '#d1fae5';
           }}>
@@ -351,7 +367,7 @@ export default function App() {
         <div style={{
           marginTop: '1rem',
           fontSize: '0.75rem',
-          color: '#9ca3af', // Gray-400
+          color: '#9ca3af',
           textAlign: 'center'
         }}>
           ID: TXN-2025-1104-87392
@@ -367,9 +383,9 @@ export default function App() {
           }
           .content-section {
             width: auto;
-            flex: 1; /* Позволяет занять больше места */
+            flex: 1; 
             max-width: 500px;
-            margin-right: 4rem; /* Отступ между колонками */
+            margin-right: 4rem; 
             margin-bottom: 0;
           }
           .card-section {
@@ -379,13 +395,13 @@ export default function App() {
             margin-top: 0;
           }
           .main-heading {
-            font-size: 4rem !important; /* 64px */
+            font-size: 4rem !important; 
           }
           .sub-heading {
-            font-size: 3rem !important; /* 48px */
+            font-size: 3rem !important; 
           }
           button {
-            width: 384px !important; /* 96 */
+            width: 384px !important; 
           }
           .rating-info {
             flex-direction: row !important;
@@ -400,10 +416,10 @@ export default function App() {
         /* Дополнительная адаптивность для больших мобильных экранов (sm) */
         @media (min-width: 640px) and (max-width: 1023px) {
            .main-heading {
-            font-size: 3rem !important; /* 48px */
+            font-size: 3rem !important; 
           }
           .sub-heading {
-            font-size: 2.5rem !important; /* 40px */
+            font-size: 2.5rem !important; 
           }
           .rating-info {
             flex-direction: row !important;
