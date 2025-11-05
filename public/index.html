@@ -23,8 +23,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '836297435654069');
-    // Убрано fbq('track', 'PageView'); из базового кода, 
-    // так как мы будем управлять им вручную в App.js для SPA.
+    // NOTE: fbq('track', 'PageView'); удалено, отслеживание PageView будет в App.js
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=836297435654069&ev=PageView&noscript=1"
@@ -33,5 +32,5 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    </body>
+  </body>
 </html>

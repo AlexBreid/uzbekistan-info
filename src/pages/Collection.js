@@ -89,7 +89,7 @@ export default function CollectionPage() {
 
         <button
           id="download-btn"
-          onClick={handleDownload}
+          onClick={handleDownload} // <-- При клике вызывается handleDownload, который отправляет событие 'Lead'
           style={{
             padding: '15px 40px',
             backgroundColor: '#ff0055',
