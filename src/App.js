@@ -1,31 +1,10 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Collection from './pages/Collection';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom'; // ← Добавь импорт
+import Collection from './pages/Collection'; // ← Импортируй компонент Work
 import QuizTashkent from './pages/QuizTashkent'; 
 import Bonus from './pages/bonus';
-import Tanishuv from "./pages/Tanishuv";
-import ThankYou from "./pages/ThankYou"; // <-- НОВЫЙ ИМПОРТ
-
-// Функция для безопасного отслеживания PageView
-const trackPageView = () => {
-  if (typeof window.fbq === 'function') {
-    window.fbq('track', 'PageView'); 
-  }
-};
-
+import Tanishuv from "./pages/Tanishuv" 
 function App() {
-  const location = useLocation();
-
-  useEffect(() => {
-    // Отслеживание PageView при каждой смене маршрута
-    trackPageView();
-    
-    if (typeof window.fbq === 'function') {
-         window.fbq.disablePushState = true; 
-    }
-    
-  }, [location.pathname]);
-
   return (
     <div className="App">
       <Routes>
@@ -33,7 +12,8 @@ function App() {
         <Route path="/Bonus" element={<Bonus />} />
         <Route path="/Collection" element={<Collection />} />
         <Route path="/QuizTashkent" element={<QuizTashkent />} />
-        <Route path="/thankyou" element={<ThankYou />} /> {/* <-- НОВЫЙ МАРШРУТ */}
+        {/* Добавь другие маршруты сюда */}
+        {/* <Route path="/" element={<Home />} /> если у тебя есть главная страница */}
       </Routes>
     </div>
   );

