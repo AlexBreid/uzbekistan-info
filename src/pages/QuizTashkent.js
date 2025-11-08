@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function Quiz() {
   // Вопросы и ответы
-  const questions = [
+  const questions = useMemo(() => [
     {
       id: 1,
       question: "O'zbekiston poytaxti qaysi shahar?",
@@ -33,7 +33,7 @@ function Quiz() {
       options: ["Alisher Navoiy", "Bobur", "Timur", "Mirzo Ulug'bek"],
       correct: "Alisher Navoiy"
     }
-  ];
+  ], []);
 
   // Состояния
   const [userAnswers, setUserAnswers] = useState({}); // выбранные ответы
