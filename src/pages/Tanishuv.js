@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// Импортируем иконки как простые SVG-компоненты или заменяем их
-// на Unicode/простые символы, чтобы избежать внешней зависимости.
-// Для демонстрации используем простые символы или встроенные SVG-пути.
 
-// *** Компоненты-заглушки для иконок ***
 const IconWrapper = ({ children, className, style }) => (
   <span className={className} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', ...style }}>
     {children}
