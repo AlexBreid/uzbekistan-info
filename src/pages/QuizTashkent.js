@@ -38,14 +38,19 @@ function Quiz() {
   // Состояния
   const [userAnswers, setUserAnswers] = useState({}); // выбранные ответы
   const [allCorrect, setAllCorrect] = useState(false); // все ли правильные
+  // 🟢 ИСПРАВЛЕНИЕ 1: Убрано 'setDownloaded', так как оно не используется.
   const [downloaded] = useState(false);
   const [submitted, setSubmitted] = useState({}); // отмечаем, что вопрос был отвечен
 
   // Проверяем, все ли ответы правильные
   useEffect(() => {
+    // 🟢 ИСПРАВЛЕНИЕ 2: Это единственный нужный useEffect. 
+    // Я оставил его, т.к. он корректно использует 'userAnswers' в зависимостях.
     const isAllCorrect = questions.every(q => userAnswers[q.id] === q.correct);
     setAllCorrect(isAllCorrect);
-  }, [userAnswers]);
+  }, [userAnswers]); 
+  
+  // ❌ УДАЛЕН НЕИСПОЛЬЗУЕМЫЙ useEffect, который вызывал ошибку зависимости 'questions'.
 
   // Обработчик выбора ответа
   const handleAnswerChange = (questionId, selectedOption) => {
@@ -352,7 +357,7 @@ function Quiz() {
                     e.target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
                   }
                 }}
-                onClick={handleClick}  // <--- Вот это было потеряно!
+                onClick={handleClick}
               >
                 {downloaded ? 'Sovgin olingan!' : 'Sovgin olish →'}
               </button>
