@@ -38,7 +38,7 @@ function Quiz() {
   // Состояния
   const [userAnswers, setUserAnswers] = useState({}); // выбранные ответы
   const [allCorrect, setAllCorrect] = useState(false); // все ли правильные
-  const [downloaded, setDownloaded] = useState(false); // скачан ли приз
+  const [downloaded] = useState(false);
   const [submitted, setSubmitted] = useState({}); // отмечаем, что вопрос был отвечен
 
   // Проверяем, все ли ответы правильные
