@@ -63,6 +63,11 @@ export default function App() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    setTimeout(() => {
+      // !!! ПЕРЕНАПРАВЛЕНИЕ НА СТАТИЧЕСКИЙ HTML-ФАЙЛ !!!
+      window.location.href = '/thankyou.html'; 
+  }, 500);
   };
 
   const features = [

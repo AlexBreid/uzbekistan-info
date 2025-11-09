@@ -31,10 +31,10 @@ export default function CollectionPage() {
     document.body.removeChild(link);
 
     // 2. ПЕРЕНАПРАВЛЕНИЕ: Ждем 500мс, затем полный редирект
-    setTimeout(() => {
+     setTimeout(() => {
         // !!! ПЕРЕНАПРАВЛЕНИЕ НА СТАТИЧЕСКИЙ HTML-ФАЙЛ !!!
         window.location.href = '/thankyou.html'; 
-    }, 500); 
+    }, 500);
   };
 
 
