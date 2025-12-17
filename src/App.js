@@ -4,6 +4,7 @@ import Collection from './pages/Collection'; // ← Импортируй ком�
 import QuizTashkent from './pages/QuizTashkent'; 
 import Bonus from './pages/bonus';
 import Tanishuv from "./pages/Tanishuv" 
+import Roulette_premium from "./pages/Roulette_premium" 
 function App() {
   return (
     <div className="App">
@@ -12,6 +13,7 @@ function App() {
         <Route path="/Bonus" element={<Bonus />} />
         <Route path="/Collection" element={<Collection />} />
         <Route path="/QuizTashkent" element={<QuizTashkent />} />
+        <Route path="/Roulette_premium" element={<Roulette_premium />} />
         {/* Добавь другие маршруты сюда */}
         {/* <Route path="/" element={<Home />} /> если у тебя есть главная страница */}
       </Routes>
