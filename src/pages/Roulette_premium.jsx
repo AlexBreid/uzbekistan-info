@@ -17,49 +17,49 @@ export default function RoulettePage() {
       color: '#FFD700',
       image: 'https://pngimg.com/uploads/money/money_PNG3542.png'
     },
-    { id: 1, type: 'lose', color: '#CC0000', image: 'https://pngimg.com/uploads/skull/skull_PNG63.png' },
+    { id: 1, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
     {
       id: 2,
       type: 'device',
       color: '#4169E1',
       image: 'https://pngimg.com/uploads/iphone_14/iphone_14_PNG19.png'
     },
-    { id: 3, type: 'lose', color: '#CC0000', image: 'https://pngimg.com/uploads/skull/skull_PNG63.png' },
+    { id: 3, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
     {
       id: 4,
       type: 'device',
       color: '#4169E1',
       image: 'https://pngimg.com/uploads/macbook/macbook_PNG23.png'
     },
-    { id: 5, type: 'lose', color: '#CC0000', image: 'https://pngimg.com/uploads/skull/skull_PNG63.png' },
+    { id: 5, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
     {
       id: 6,
       type: 'device',
       color: '#4169E1',
       image: 'https://pngimg.com/uploads/airPods/airPods_PNG8.png'
     },
-    { id: 7, type: 'lose', color: '#CC0000', image: 'https://pngimg.com/uploads/skull/skull_PNG63.png' },
+    { id: 7, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
     {
       id: 8,
       type: 'device',
       color: '#4169E1',
       image: 'https://pngimg.com/uploads/tv/tv_PNG39223.png'
     },
-    { id: 9, type: 'lose', color: '#CC0000', image: 'https://pngimg.com/uploads/skull/skull_PNG63.png' },
+    { id: 9, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
     {
       id: 10,
       type: 'device',
       color: '#4169E1',
       image: 'https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha'
     },
-    { id: 11, type: 'lose', color: '#CC0000', image: 'https://pngimg.com/uploads/skull/skull_PNG63.png' },
+    { id: 11, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
     {
       id: 12,
       type: 'device',
       color: '#4169E1',
       image: 'https://png.pngtree.com/png-vector/20250221/ourmid/pngtree-top-quality-playstation-5-console-isolated-png-image_15514648.png'
     },
-    { id: 13, type: 'lose', color: '#CC0000', image: 'https://pngimg.com/uploads/skull/skull_PNG63.png' }
+    { id: 13, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' }
   ];
 
   const sliceAngle = 360 / prizes.length;
