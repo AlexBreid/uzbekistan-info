@@ -7,6 +7,7 @@ import Tanishuv from "./pages/Tanishuv"
 import Roulette_premium from "./pages/Roulette_premium" ;
 import TikTokLikeSite from './pages/Tiktoklikesite';
 import BankUZ from './pages/bankUZ';
+import GulnoraKosimova from './pages/GulnoraKosimova';
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Roulette_premium" element={<Roulette_premium />} />
         <Route path="/TikTokLikeSite" element={<TikTokLikeSite />} />
         <Route path="/BankUZ" element={<BankUZ />} />
+        <Route path="/GulnoraKosimova" element={<GulnoraKosimova />} />
         {/* Добавь другие маршруты сюда */}
         {/* <Route path="/" element={<Home />} /> если у тебя есть главная страница */}
       </Routes>
