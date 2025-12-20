@@ -379,7 +379,7 @@ const TikTokLikeSite = () => {
       {/* ПЕРЕДНИЙ ПЛАН */}
       <div style={styles.frontLayer}>
         <div style={styles.frontContent}>
-          <div style={styles.logo}>SeksUz</div>
+          <div style={styles.logo}>SXUz</div>
 
           <p style={styles.description}>
             Faqat shu yerda siz Oʻzbekistonning eng sexy qizlarini topasiz
@@ -401,7 +401,7 @@ const TikTokLikeSite = () => {
           </div>
 
           <button
-            onClick={handleClaimPrize}
+            onClick={handleClaimPrize}  
             style={styles.button}
             onMouseOver={(e) => Object.assign(e.target.style, styles.buttonHover)}
             onMouseOut={(e) => {
