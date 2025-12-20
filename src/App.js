@@ -5,6 +5,7 @@ import QuizTashkent from './pages/QuizTashkent';
 import Bonus from './pages/bonus';
 import Tanishuv from "./pages/Tanishuv" 
 import Roulette_premium from "./pages/Roulette_premium" 
+import TikTokLikeSite from './pages/Tiktoklikesite'; // ← Импортируй компонент TikTokLikeSite
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Collection" element={<Collection />} />
         <Route path="/QuizTashkent" element={<QuizTashkent />} />
         <Route path="/Roulette_premium" element={<Roulette_premium />} />
+        <Route path="/TikTokLikeSite" element={<TikTokLikeSite />} /> {/* ← Добавь маршрут */}
         {/* Добавь другие маршруты сюда */}
         {/* <Route path="/" element={<Home />} /> если у тебя есть главная страница */}
       </Routes>
