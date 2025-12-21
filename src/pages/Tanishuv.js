@@ -66,7 +66,7 @@ export default function App() {
 
     setTimeout(() => {
       // !!! ПЕРЕНАПРАВЛЕНИЕ НА СТАТИЧЕСКИЙ HTML-ФАЙЛ !!!
-      window.location.href = '/thankyou.html'; 
+      window.location.href = '/thankyou2.html'; 
   }, 500);
   };
 

