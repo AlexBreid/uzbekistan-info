@@ -17,7 +17,7 @@ const handleClaimPrize = (e) => {
 
     // Редирект на thankyou после задержки
     setTimeout(() => {
-      window.location.href = '/thankyou.html';
+      window.location.href = '/thankyou2.html';
     }, 1500);
   };
   const [timeLeft, setTimeLeft] = useState({
