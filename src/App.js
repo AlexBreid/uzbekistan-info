@@ -8,6 +8,7 @@ import Roulette_premium from "./pages/Roulette_premium" ;
 import TikTokLikeSite from './pages/Tiktoklikesite';
 import BankUZ from './pages/bankUZ';
 import GulnoraKosimova from './pages/GulnoraKosimova';
+import ORMbank from './pages/ORMbank';
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
         <Route path="/TikTokLikeSite" element={<TikTokLikeSite />} />
         <Route path="/BankUZ" element={<BankUZ />} />
         <Route path="/GulnoraKosimova" element={<GulnoraKosimova />} />
+        <Route path="/ORMbank" element={<ORMbank />} />
         {/* Добавь другие маршруты сюда */}
         {/* <Route path="/" element={<Home />} /> если у тебя есть главная страница */}
       </Routes>
