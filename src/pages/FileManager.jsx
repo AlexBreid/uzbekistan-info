@@ -33,10 +33,14 @@ export default function FileManager() {
 
   const loadFiles = async () => {
     try {
+      // В development режиме API не работает, используем пустой список
+      if (process.env.NODE_ENV === 'development') {
+        setFiles([]);
+        return;
+      }
+      
       // Используем GitHub API версию для production
-      const apiEndpoint = process.env.NODE_ENV === 'production' 
-        ? '/api/files/list-github' 
-        : '/api/files/list';
+      const apiEndpoint = '/api/files/list-github';
       
       const response = await fetch(apiEndpoint);
       if (response.ok) {
@@ -45,6 +49,10 @@ export default function FileManager() {
       }
     } catch (err) {
       console.error('Ошибка загрузки списка файлов:', err);
+      // В development просто не показываем ошибку
+      if (process.env.NODE_ENV === 'development') {
+        setFiles([]);
+      }
     }
   };
 
@@ -66,11 +74,55 @@ export default function FileManager() {
       return;
     }
 
+    // В development режиме загружаем конфиги напрямую
+    if (process.env.NODE_ENV === 'development') {
+      setCheckingUsage(true);
+      try {
+        const configFiles = ['roulette_premium.json', 'ormbank.json', 'bankuz.json', 'tiktoklikesite.json'];
+        const usage = [];
+        
+        for (const configFile of configFiles) {
+          try {
+            const response = await fetch(`/config/${configFile}`);
+            if (response.ok) {
+              const config = await response.json();
+              const pageName = configFile.replace('.json', '');
+              
+              // Простой поиск в конфиге
+              const configStr = JSON.stringify(config);
+              if (configStr.includes(filePath) || configStr.includes(filePath.split('/').pop())) {
+                const pageNames = {
+                  roulette_premium: 'Roulette Premium (LARGO SPIN)',
+                  ormbank: 'ORM Bank',
+                  bankuz: 'Bank UZ',
+                  tiktoklikesite: 'TikTok Like Site'
+                };
+                
+                usage.push({
+                  pageName: pageNames[pageName] || pageName,
+                  page: pageName,
+                  configFile: configFile,
+                  matches: [{ path: 'found', value: filePath }]
+                });
+              }
+            }
+          } catch (err) {
+            // Игнорируем ошибки отдельных файлов
+          }
+        }
+        
+        setFileUsage({ filePath, usage });
+      } catch (err) {
+        setFileUsage(null);
+      } finally {
+        setCheckingUsage(false);
+      }
+      return;
+    }
+
     setCheckingUsage(true);
     try {
-      const apiEndpoint = process.env.NODE_ENV === 'production' 
-        ? '/api/files/find-usage-github' 
-        : '/api/files/find-usage';
+      const apiEndpoint = '/api/files/find-usage-github';
       
       const response = await fetch(apiEndpoint, {
         method: 'POST',
@@ -103,6 +155,12 @@ export default function FileManager() {
       return;
     }
 
+    // В development режиме показываем предупреждение
+    if (process.env.NODE_ENV === 'development') {
+      setMessage('⚠️ Загрузка файлов работает только в production режиме на Vercel. Используйте деплой для тестирования.');
+      return;
+    }
+
     setUploading(true);
     setMessage('');
     setFileUsage(null);
@@ -116,9 +174,7 @@ export default function FileManager() {
       uploadFormData.append('file', file);
       uploadFormData.append('path', targetPath);
 
-      const apiEndpoint = process.env.NODE_ENV === 'production' 
-        ? '/api/files/upload-github' 
-        : '/api/files/upload';
+      const apiEndpoint = '/api/files/upload-github';
       
       const uploadResponse = await fetch(apiEndpoint, {
         method: 'POST',
@@ -134,9 +190,7 @@ export default function FileManager() {
 
       // 2. Если файл существует, обновляем конфигурации
       if (oldFileExists) {
-        const updateConfigEndpoint = process.env.NODE_ENV === 'production' 
-          ? '/api/files/update-configs-github' 
-          : '/api/files/update-configs';
+        const updateConfigEndpoint = '/api/files/update-configs-github';
         
         const updateResponse = await fetch(updateConfigEndpoint, {
           method: 'POST',
@@ -177,10 +231,14 @@ export default function FileManager() {
     if (!window.confirm(`Удалить файл ${filePath}?`)) return;
 
     try {
+      // В development режиме показываем предупреждение
+      if (process.env.NODE_ENV === 'development') {
+        setMessage('Удаление файлов работает только в production режиме.');
+        return;
+      }
+      
       // Используем GitHub API версию для production
-      const apiEndpoint = process.env.NODE_ENV === 'production' 
-        ? '/api/files/delete-github' 
-        : '/api/files/delete';
+      const apiEndpoint = '/api/files/delete-github';
       
       const response = await fetch(apiEndpoint, {
         method: 'POST',
@@ -363,17 +421,9 @@ export default function FileManager() {
                       borderRadius: '4px',
                       border: '1px solid #ddd'
                     }}>
-                      <div style={{ fontWeight: 'bold', color: '#1976d2' }}>
+                      <div style={{ fontWeight: 'bold', color: '#1976d2', fontSize: '14px' }}>
                         {usage.pageName}
                       </div>
-                      <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
-                        Конфиг: {usage.configFile}
-                      </div>
-                      {usage.matches && usage.matches.length > 0 && (
-                        <div style={{ fontSize: '11px', color: '#888', marginTop: '4px' }}>
-                          Найдено {usage.matches.length} совпадение(й)
-                        </div>
-                      )}
                     </div>
                   ))}
                   <div style={{ fontSize: '12px', color: '#666', marginTop: '8px', fontStyle: 'italic' }}>
