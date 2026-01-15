@@ -173,7 +173,7 @@ export default function FileManager() {
   };
 
   const handleDelete = async (filePath) => {
-    if (!confirm(`Удалить файл ${filePath}?`)) return;
+    if (!window.confirm(`Удалить файл ${filePath}?`)) return;
 
     try {
       // Используем GitHub API версию для production

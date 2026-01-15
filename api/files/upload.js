@@ -3,6 +3,14 @@
 
 const fs = require('fs');
 const path = require('path');
+const formidable = require('formidable');
+
+// Отключаем парсинг тела по умолчанию
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -13,9 +21,14 @@ export default async function handler(req, res) {
   // Это решение работает только в development или нужен другой подход
   
   try {
-    const formData = await req.formData();
-    const file = formData.get('file');
-    const targetPath = formData.get('path');
+    // Парсим multipart/form-data
+    const form = formidable({
+      maxFileSize: 50 * 1024 * 1024, // 50MB
+    });
+
+    const [fields, files] = await form.parse(req);
+    const file = Array.isArray(files.file) ? files.file[0] : files.file;
+    const targetPath = Array.isArray(fields.path) ? fields.path[0] : fields.path;
 
     if (!file || !targetPath) {
       return res.status(400).json({ error: 'File and path required' });
@@ -27,8 +40,10 @@ export default async function handler(req, res) {
     }
 
     // Читаем файл
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const buffer = fs.readFileSync(file.filepath);
+    
+    // Удаляем временный файл
+    fs.unlinkSync(file.filepath);
 
     // Путь к public директории
     const publicPath = path.join(process.cwd(), 'public', targetPath);

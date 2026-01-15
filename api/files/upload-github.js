@@ -1,15 +1,23 @@
 // Vercel Serverless Function для загрузки файлов через GitHub API
 // РАБОТАЕТ В PRODUCTION на Vercel
 
-export default async function handler(req, res) {
+const formidable = require('formidable');
+const fs = require('fs');
+
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const formData = await req.formData();
-    const file = formData.get('file');
-    const targetPath = formData.get('path');
+    // Парсим multipart/form-data
+    const form = formidable({
+      maxFileSize: 50 * 1024 * 1024, // 50MB
+    });
+
+    const [fields, files] = await form.parse(req);
+    const file = Array.isArray(files.file) ? files.file[0] : files.file;
+    const targetPath = Array.isArray(fields.path) ? fields.path[0] : fields.path;
 
     if (!file || !targetPath) {
       return res.status(400).json({ error: 'File and path required' });
@@ -32,8 +40,11 @@ export default async function handler(req, res) {
     }
 
     // Читаем файл и конвертируем в base64
-    const bytes = await file.arrayBuffer();
-    const content = Buffer.from(bytes).toString('base64');
+    const fileBuffer = fs.readFileSync(file.filepath);
+    const content = fileBuffer.toString('base64');
+    
+    // Удаляем временный файл
+    fs.unlinkSync(file.filepath);
 
     // GitHub API путь: public/{targetPath}
     const githubPath = `public/${targetPath}`;

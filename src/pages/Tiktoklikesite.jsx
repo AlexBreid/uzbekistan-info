@@ -91,23 +91,10 @@ const TikTokLikeSite = () => {
 
   const texts = config?.texts || {};
 
-  if (loading) {
-    return (
-      <div style={{
-        width: '100%',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white'
-      }}>
-        Загрузка...
-      </div>
-    );
-  }
-
+  // useEffect должен быть вызван ДО условного return (правила хуков React)
   useEffect(() => {
+    if (loading) return; // Не запускаем эффект пока загружается
+    
     const totalHeight = videos.length * 720;
     
     const interval = setInterval(() => {
@@ -123,7 +110,23 @@ const TikTokLikeSite = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [videos.length]);
+  }, [videos.length, loading]);
+
+  if (loading) {
+    return (
+      <div style={{
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'white'
+      }}>
+        Загрузка...
+      </div>
+    );
+  }
 
   const styles = {
     container: {
