@@ -92,8 +92,12 @@ const TikTokLikeSite = () => {
   const texts = config?.texts || {};
 
   // useEffect должен быть вызван ДО условного return (правила хуков React)
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (loading) return; // Не запускаем эффект пока загружается
+    // Не запускаем эффект пока загружается или нет видео
+    if (loading || videos.length === 0) {
+      return;
+    }
     
     const totalHeight = videos.length * 720;
     

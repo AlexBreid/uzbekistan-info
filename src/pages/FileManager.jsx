@@ -173,6 +173,7 @@ export default function FileManager() {
   };
 
   const handleDelete = async (filePath) => {
+    // eslint-disable-next-line no-restricted-globals
     if (!window.confirm(`Удалить файл ${filePath}?`)) return;
 
     try {
