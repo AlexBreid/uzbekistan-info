@@ -11,7 +11,6 @@ const Download = () => <IconWrapper>⬇️</IconWrapper>;
 const MapPin = () => <IconWrapper>📍</IconWrapper>;
 const Video = () => <IconWrapper>📹</IconWrapper>;
 const Heart = () => <IconWrapper>❤️</IconWrapper>;
-const Sparkles = () => <IconWrapper>✨</IconWrapper>;
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);

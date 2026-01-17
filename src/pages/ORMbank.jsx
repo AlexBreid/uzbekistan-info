@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Download, CheckCircle, Shield, Zap } from 'lucide-react';
+import { Download, CheckCircle } from 'lucide-react';
 import { useConfig } from '../hooks/useConfig';
 
 const styles = `
