@@ -4,7 +4,7 @@ import Collection from './pages/Collection'; // ← Импортируй ком�
 import QuizTashkent from './pages/QuizTashkent'; 
 import Bonus from './pages/bonus';
 import Tanishuv from "./pages/Tanishuv" 
-import Roulette_premium from "./pages/Roulette_premium" ;
+import RoulettePremium from "./pages/Roulette_premium";
 import TikTokLikeSite from './pages/Tiktoklikesite';
 import BankUZ from './pages/bankUZ';
 import GulnoraKosimova from './pages/GulnoraKosimova';
@@ -18,7 +18,7 @@ function App() {
         <Route path="/Bonus" element={<Bonus />} />
         <Route path="/Collection" element={<Collection />} />
         <Route path="/QuizTashkent" element={<QuizTashkent />} />
-        <Route path="/Roulette_premium" element={<Roulette_premium />} />
+        <Route path="/Roulette_premium" element={<RoulettePremium />} />
         <Route path="/TikTokLikeSite" element={<TikTokLikeSite />} />
         <Route path="/BankUZ" element={<BankUZ />} />
         <Route path="/GulnoraKosimova" element={<GulnoraKosimova />} />
