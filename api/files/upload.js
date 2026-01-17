@@ -3,16 +3,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const formidable = require('formidable');
+const { IncomingForm } = require('formidable');
+const fs = require('fs');
+const path = require('path');
 
-// Отключаем парсинг тела по умолчанию
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -22,8 +17,9 @@ export default async function handler(req, res) {
   
   try {
     // Парсим multipart/form-data
-    const form = formidable({
+    const form = new IncomingForm({
       maxFileSize: 50 * 1024 * 1024, // 50MB
+      keepExtensions: true,
     });
 
     const [fields, files] = await form.parse(req);

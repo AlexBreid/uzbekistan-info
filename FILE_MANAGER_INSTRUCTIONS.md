@@ -80,3 +80,5 @@ Netlify имеет writable файловую систему и можно исп
 2. Добавить переменные в Vercel
 3. Обновить `api/files/upload.js` на использование GitHub API
 
+
+

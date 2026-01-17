@@ -1,7 +1,7 @@
 // Vercel Serverless Function для загрузки файлов через GitHub API
 // РАБОТАЕТ В PRODUCTION на Vercel
 
-const formidable = require('formidable');
+const { IncomingForm } = require('formidable');
 const fs = require('fs');
 
 module.exports = async function handler(req, res) {
@@ -11,8 +11,9 @@ module.exports = async function handler(req, res) {
 
   try {
     // Парсим multipart/form-data
-    const form = formidable({
+    const form = new IncomingForm({
       maxFileSize: 50 * 1024 * 1024, // 50MB
+      keepExtensions: true,
     });
 
     const [fields, files] = await form.parse(req);
